@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace DUCK.HieriarchyBehaviour
 {
@@ -101,24 +101,24 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Destroy a MonoBehaviour and create a new GameObject as a child transform that has the given TBehaviour component.
+		/// Destroy a child MonoBehaviour and create a new GameObject as a child transform that has the given TBehaviour component.
 		/// TBehaviour will be initialized automatically and then returned.
 		/// </summary>
-		/// <param name="toDestroy">The MonoBehaviour to destroy.</param>
+		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be created.</typeparam>
 		/// <returns>The new TBehaviour</returns>
 		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			Object.Destroy(toDestroy.gameObject);
+			Utils.DestroyChild(parent, toDestroy);
 			return parent.CreateChild<TBehaviour>();
 		}
 
 		/// <summary>
-		/// Destroy a MonoBehaviour and create a new GameObject as a child transform that has the given TBehaviour component.
+		/// Destroy a child MonoBehaviour and create a new GameObject as a child transform that has the given TBehaviour component.
 		/// TBehaviour will be initialized with the given arguements automatically and then returned.
 		/// </summary>
-		/// <param name="toDestroy">The MonoBehaviour to destroy.</param>
+		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
 		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be created.</typeparam>
 		/// <typeparam name="TArgs">The type of arguements to be given on initialization.</typeparam>
@@ -126,15 +126,15 @@ namespace DUCK.HieriarchyBehaviour
 		public static TBehaviour ReplaceChild<TBehaviour, TArgs>(this GameObject parent, MonoBehaviour toDestroy, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			Object.Destroy(toDestroy.gameObject);
+			Utils.DestroyChild(parent, toDestroy);
 			return parent.CreateChild<TBehaviour, TArgs>(args);
 		}
 
 		/// <summary>
-		/// Destroy a MonoBehaviour, then using the given path to load and create the asset as a child transform that has the given TBehaviour component.
+		/// Destroy a child MonoBehaviour, then using the given path to load and create the asset as a child transform that has the given TBehaviour component.
 		/// TBehaviour will be initialized automatically and then returned.
 		/// </summary>
-		/// <param name="toDestroy">The MonoBehaviour to destroy.</param>
+		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <param name="path">The path to the resourced asset.</param>
 		/// <param name="worldPositionStay">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
 		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be created.</typeparam>
@@ -147,10 +147,10 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Destroy a MonoBehaviour, then using the given path to load and create the asset as a child transform that has the given TBehaviour component.
+		/// Destroy a child MonoBehaviour, then using the given path to load and create the asset as a child transform that has the given TBehaviour component.
 		/// TBehaviour will be initialized with the given arguements automatically and then returned.
 		/// </summary>
-		/// <param name="toDestroy">The MonoBehaviour to destroy.</param>
+		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <param name="path">The path to the resourced asset.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
 		/// <param name="worldPositionStay">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
@@ -165,25 +165,25 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Destroy a MonoBehaviour and create a clone of the given TBehaviour as a child transform.
+		/// Destroy a child MonoBehaviour and create a clone of the given TBehaviour as a child transform.
 		/// TBehaviour will be initialized automatically and then returned.
 		/// </summary>
-		/// <param name="toDestroy">The MonoBehaviour to destroy.</param>
+		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <param name="toClone">The GameObject to clone.</param>
 		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be created.</typeparam>
 		/// <returns>The new TBehaviour</returns>
 		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy, TBehaviour toClone)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			Object.Destroy(toDestroy.gameObject);
+			Utils.DestroyChild(parent, toDestroy);
 			return parent.CreateChild(toClone);
 		}
 
 		/// <summary>
-		/// Destroy a MonoBehaviour and create a clone of the given TBehaviour as a child transform.
+		/// Destroy a child MonoBehaviour and create a clone of the given TBehaviour as a child transform.
 		/// TBehaviour will be initialized with the given arguements automatically and then returned.
 		/// </summary>
-		/// <param name="toDestroy">The MonoBehaviour to destroy.</param>
+		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <param name="toClone">The GameObject to clone.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
 		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be created.</typeparam>
@@ -192,7 +192,7 @@ namespace DUCK.HieriarchyBehaviour
 		public static TBehaviour ReplaceChild<TBehaviour, TArgs>(this GameObject parent, MonoBehaviour toDestroy, TBehaviour toClone, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			Object.Destroy(toDestroy.gameObject);
+			Utils.DestroyChild(parent, toDestroy);
 			return parent.CreateChild(toClone, args);
 		}
 	}
