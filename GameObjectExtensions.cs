@@ -7,7 +7,7 @@ namespace DUCK.HieriarchyBehaviour
 		public static TBehaviour CreateChild<TBehaviour>(this GameObject gameObject)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			var behaviour = Utils.CreateGameObjectWithBehaviour<TBehaviour>(gameObject.transform);
+			var behaviour = Utils.CreateGameObjectWithBehaviour<TBehaviour>(gameObject);
 			behaviour.Initialize();
 			return behaviour;
 		}
@@ -15,7 +15,7 @@ namespace DUCK.HieriarchyBehaviour
 		public static TBehaviour CreateChild<TBehaviour, TArgs>(this GameObject gameObject, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			var behaviour = Utils.CreateGameObjectWithBehaviour<TBehaviour>(gameObject.transform);
+			var behaviour = Utils.CreateGameObjectWithBehaviour<TBehaviour>(gameObject);
 			behaviour.Initialize(args);
 			return behaviour;
 		}
@@ -23,7 +23,7 @@ namespace DUCK.HieriarchyBehaviour
 		public static TBehaviour CreateChildFromResources<TBehaviour>(this GameObject gameObject, string path, bool worldPositionStay = true)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			var behaviour = Utils.InstantiateResource<TBehaviour>(path, gameObject.transform, worldPositionStay);
+			var behaviour = Utils.InstantiateResource<TBehaviour>(path, gameObject, worldPositionStay);
 			behaviour.Initialize();
 			return behaviour;
 		}
@@ -31,7 +31,7 @@ namespace DUCK.HieriarchyBehaviour
 		public static TBehaviour CreateChildFromResources<TBehaviour, TArgs>(this GameObject gameObject, string path, TArgs args, bool worldPositionStay = true)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			var behaviour = Utils.InstantiateResource<TBehaviour>(path, gameObject.transform, worldPositionStay);
+			var behaviour = Utils.InstantiateResource<TBehaviour>(path, gameObject, worldPositionStay);
 			behaviour.Initialize(args);
 			return behaviour;
 		}
@@ -39,7 +39,7 @@ namespace DUCK.HieriarchyBehaviour
 		public static TBehaviour CreateChildFromLoaded<TBehaviour>(this GameObject gameObject, TBehaviour behaviourToClone)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			var behaviour = Utils.CloneBehaviour(behaviourToClone, gameObject.transform);
+			var behaviour = Utils.CloneBehaviour(behaviourToClone, gameObject);
 			behaviour.Initialize();
 			return behaviour;
 		}
@@ -47,7 +47,7 @@ namespace DUCK.HieriarchyBehaviour
 		public static TBehaviour CreateChildFromLoaded<TBehaviour, TArgs>(this GameObject gameObject, TBehaviour behaviourToClone, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			var behaviour = Utils.CloneBehaviour(behaviourToClone, gameObject.transform);
+			var behaviour = Utils.CloneBehaviour(behaviourToClone, gameObject);
 			behaviour.Initialize(args);
 			return behaviour;
 		}
