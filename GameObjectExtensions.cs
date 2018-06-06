@@ -36,18 +36,18 @@ namespace DUCK.HieriarchyBehaviour
 			return behaviour;
 		}
 
-		public static TBehaviour CreateChild<TBehaviour>(this GameObject parent, TBehaviour behaviourToClone)
+		public static TBehaviour CreateChild<TBehaviour>(this GameObject parent, TBehaviour toClone)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			var behaviour = Utils.CloneBehaviour(behaviourToClone, parent);
+			var behaviour = Utils.CloneBehaviour(toClone, parent);
 			behaviour.Initialize();
 			return behaviour;
 		}
 
-		public static TBehaviour CreateChild<TBehaviour, TArgs>(this GameObject parent, TBehaviour behaviourToClone, TArgs args)
+		public static TBehaviour CreateChild<TBehaviour, TArgs>(this GameObject parent, TBehaviour toClone, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			var behaviour = Utils.CloneBehaviour(behaviourToClone, parent);
+			var behaviour = Utils.CloneBehaviour(toClone, parent);
 			behaviour.Initialize(args);
 			return behaviour;
 		}
