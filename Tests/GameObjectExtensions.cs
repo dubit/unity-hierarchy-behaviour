@@ -13,25 +13,7 @@ namespace DUCK.HieriarchyBehaviour
 		private const string PREFAB_WITH_ARGS_RESOURCE_PATH = "PrefabWithArgs";
 		private const string RESOURCE_PATH = "/Resources/";
 
-		private interface ITestInitialize
-		{
-			bool DidInitialize { get; }
-		}
-
-		private interface ITestArgs<out TArgs>
-		{
-			TArgs Args { get; }
-		}
-
-		private interface ITestHierarchyBehaviour : IHierarchyBehaviour, ITestInitialize
-		{
-		}
-
-		private interface ITestHierarchyBehaviour<TArgs> : IHierarchyBehaviour<TArgs>, ITestInitialize, ITestArgs<TArgs>
-		{
-		}
-
-		private class HierarchyBehaviourWithArgs : MonoBehaviour, ITestHierarchyBehaviour<string>
+		private class HierarchyBehaviourWithArgs : MonoBehaviour, IHierarchyBehaviour<string>
 		{
 			public string Args { get; private set; }
 			public bool DidInitialize { get; private set; }
@@ -43,7 +25,7 @@ namespace DUCK.HieriarchyBehaviour
 			}
 		}
 
-		private class HierarchyBehaviour : MonoBehaviour, ITestHierarchyBehaviour
+		private class HierarchyBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
 			public bool DidInitialize { get; private set; }
 
@@ -81,143 +63,288 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		[Test]
-		public void Expect_CreateChild()
+		public void Expect_CreateChild_ToInitialize()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviour>();
-			TestBehaviourWithoutArgs(behaviour);
+			Assert.IsTrue(behaviour.DidInitialize);
 		}
 
 		[Test]
-		public void Expect_CreateChildWithArgs()
+		public void Expect_CreateChild_AsChild()
+		{
+			var behaviour = root.gameObject.CreateChild<HierarchyBehaviour>();
+			Assert.IsTrue(behaviour.transform.parent == root.transform);
+		}
+
+		[Test]
+		public void Expect_CreateChild_WithArgs_ToInitialize()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(TEST_ARGS);
-			TestBehaviourWithArgs(behaviour, TEST_ARGS);
+			Assert.IsTrue(behaviour.DidInitialize);
 		}
 
 		[Test]
-		public void Expect_CreateChildFromResources()
+		public void Expect_CreateChild_WithArgs_AsChild()
+		{
+			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(TEST_ARGS);
+			Assert.IsTrue(behaviour.transform.parent == root.transform);
+		}
+
+		[Test]
+		public void Expect_CreateChild_WithArgs_ToInitialize_WithArgs()
+		{
+			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(TEST_ARGS);
+			Assert.AreEqual(behaviour.Args, TEST_ARGS);
+		}
+
+		[Test]
+		public void Expect_CreateChild_FromResources_ToInitialize()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviour>(PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
-			TestBehaviourWithoutArgs(behaviour);
+			Assert.IsTrue(behaviour.DidInitialize);
 		}
 
 		[Test]
-		public void Expect_CreateChildFromResourcesWithArgs()
+		public void Expect_CreateChild_FromResources_AsChild()
+		{
+			var behaviour = root.gameObject.CreateChild<HierarchyBehaviour>(PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
+			Assert.IsTrue(behaviour.transform.parent == root.transform);
+		}
+
+		[Test]
+		public void Expect_CreateChild_FromResources_WithArgs_ToInitialize()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
-			TestBehaviourWithArgs(behaviour, TEST_ARGS);
+			Assert.IsTrue(behaviour.DidInitialize);
 		}
 
 		[Test]
-		public void Expect_CreateChildFromLoaded()
+		public void Expect_CreateChild_FromResources_WithArgs_AsChild()
+		{
+			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
+			Assert.IsTrue(behaviour.transform.parent == root.transform);
+		}
+
+		[Test]
+		public void Expect_CreateChild_FromResources_WithArgs_ToInitialize_WithArgs()
+		{
+			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
+			Assert.AreEqual(behaviour.Args, TEST_ARGS);
+		}
+
+		[Test]
+		public void Expect_CreateChild_FromLoaded_ToInitialize()
 		{
 			var loadedBehaviour = Resources.Load<HierarchyBehaviour>(PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.CreateChild(loadedBehaviour);
-			TestBehaviourWithoutArgs(behaviour);
+			Assert.IsTrue(behaviour.DidInitialize);
 		}
 
 		[Test]
-		public void Expect_CreateChildFromLoadedWithArgs()
+		public void Expect_CreateChild_FromLoaded_AsChild()
+		{
+			var loadedBehaviour = Resources.Load<HierarchyBehaviour>(PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
+			var behaviour = root.gameObject.CreateChild(loadedBehaviour);
+			Assert.IsTrue(behaviour.transform.parent == root.transform);
+		}
+
+		[Test]
+		public void Expect_CreateChild_FromLoaded_WithArgs_ToInitialize()
 		{
 			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.CreateChild(loadedBehaviour, TEST_ARGS);
-			TestBehaviourWithArgs(behaviour, TEST_ARGS);
+			Assert.IsTrue(behaviour.DidInitialize);
 		}
 
 		[Test]
-		public void Expect_ReplaceChild()
+		public void Expect_CreateChild_FromLoaded_WithArgs_AsChild()
+		{
+			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
+			var behaviour = root.gameObject.CreateChild(loadedBehaviour, TEST_ARGS);
+			Assert.IsTrue(behaviour.transform.parent == root.transform);
+		}
+
+		[Test]
+		public void Expect_CreateChild_FromLoaded_WithArgs_ToInitialize_WithArgs()
+		{
+			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
+			var behaviour = root.gameObject.CreateChild(loadedBehaviour, TEST_ARGS);
+			Assert.AreEqual(behaviour.Args, TEST_ARGS);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_ToDestroy()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			root.gameObject.ReplaceChild<HierarchyBehaviour>(toReplace);
+			Assert.IsTrue(toReplace == null);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_ToCreateAsChild()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, TEST_ARGS);
+			Assert.True(behaviour.transform.parent == root.transform);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_ToInitialize()
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviour>(toReplace);
-			TestBehaviourReplacedWithoutArgs(toReplace, behaviour);
+			Assert.IsTrue(behaviour.DidInitialize);
 		}
 
 		[Test]
-		public void Expect_ReplaceChildWithArgs()
+		public void Expect_ReplaceChild_WithArgs_ToInitialize()
 		{
-			var toReplace = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(TEST_ARGS);
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, TEST_ARGS);
-			TestBehaviourReplacedWithArgs(toReplace, behaviour, TEST_ARGS);
+			Assert.IsTrue(behaviour.DidInitialize);
 		}
 
 		[Test]
-		public void Expect_ReplaceChildFromResources()
+		public void Expect_ReplaceChild_WithArgs_ToDestroy()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, TEST_ARGS);
+			Assert.IsTrue(toReplace == null);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_WithArgs_ToCreateAsChild()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, TEST_ARGS);
+			Assert.True(behaviour.transform.parent == root.transform);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_WithArgs_ToInitialize_WithArgs()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, TEST_ARGS);
+			Assert.AreEqual(behaviour.Args, TEST_ARGS);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_FromResources_ToDestroy()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			root.gameObject.ReplaceChild<HierarchyBehaviour>(toReplace, PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
+			Assert.IsTrue(toReplace == null);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_FromResources_ToCreateAsChild()
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviour>(toReplace, PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
-			TestBehaviourReplacedWithoutArgs(toReplace, behaviour);
+			Assert.True(behaviour.transform.parent == root.transform);
 		}
 
 		[Test]
-		public void Expect_ReplaceChildFromResourcesWithArgs()
+		public void Expect_ReplaceChild_FromResources_ToInitialize()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviour>(toReplace, PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
+			Assert.IsTrue(behaviour.DidInitialize);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_FromResources_WithArgs_ToInitialize()
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
-			TestBehaviourReplacedWithArgs(toReplace, behaviour, TEST_ARGS);
+			Assert.IsTrue(behaviour.DidInitialize);
 		}
 
 		[Test]
-		public void Expect_ReplaceChildFromLoaded()
+		public void Expect_ReplaceChild_FromResources_WithArgs_ToDestroy()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
+			Assert.IsTrue(toReplace == null);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_FromResources_WithArgs_ToCreateAsChild()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
+			Assert.True(behaviour.transform.parent == root.transform);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_FromResources_WithArgs_ToInitialize_WithArgs()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
+			Assert.AreEqual(behaviour.Args, TEST_ARGS);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_FromLoaded_ToDestroy()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			var loadedBehaviour = Resources.Load<HierarchyBehaviour>(PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
+			root.gameObject.ReplaceChild(toReplace, loadedBehaviour);
+			Assert.IsTrue(toReplace == null);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_FromLoaded_ToCreateAsChild()
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var loadedBehaviour = Resources.Load<HierarchyBehaviour>(PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.ReplaceChild(toReplace, loadedBehaviour);
-			TestBehaviourReplacedWithoutArgs(toReplace, behaviour);
+			Assert.True(behaviour.transform.parent == root.transform);
 		}
 
 		[Test]
-		public void Expect_ReplaceChildFromLoadedWithArgs()
+		public void Expect_ReplaceChild_FromLoaded_ToInitialize()
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.ReplaceChild(toReplace, loadedBehaviour, TEST_ARGS);
-			TestBehaviourReplacedWithArgs(toReplace, behaviour, TEST_ARGS);
-		}
-
-		private void TestBehaviourReplacedWithoutArgs<TBehaviour>(MonoBehaviour toDestroy, TBehaviour behaviour)
-			where TBehaviour : MonoBehaviour, IHierarchyBehaviour, ITestInitialize
-		{
-			Assert.IsTrue(toDestroy == null);
-			TestBehaviourWithoutArgs(behaviour);
-		}
-
-		private void TestBehaviourReplacedWithArgs<TBehaviour, TArgs>(MonoBehaviour toDestroy, TBehaviour behaviour, TArgs args)
-			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>, ITestInitialize, ITestArgs<TArgs>
-		{
-			Assert.IsTrue(toDestroy == null);
-			TestBehaviourWithArgs(behaviour, args);
-		}
-
-		private void TestBehaviourWithoutArgs<TBehaviour>(TBehaviour behaviour)
-			where TBehaviour : MonoBehaviour, IHierarchyBehaviour, ITestInitialize
-		{
-			IsInitialized(behaviour);
-			IsChildOf(behaviour.transform, root.transform);
-		}
-
-		private void TestBehaviourWithArgs<TBehaviour, TArgs>(TBehaviour behaviour, TArgs args)
-			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>, ITestInitialize, ITestArgs<TArgs>
-		{
-			IsInitialized(behaviour);
-			IsChildOf(behaviour.transform, root.transform);
-			IsInitializedWithArgs(behaviour, args);
-		}
-
-		private static void IsChildOf(Transform child, Transform parent)
-		{
-			Assert.True(child.parent == parent);
-		}
-
-		private static void IsInitialized<TBehaviour>(TBehaviour behaviour)
-			where TBehaviour : ITestInitialize
-		{
 			Assert.IsTrue(behaviour.DidInitialize);
 		}
 
-		private static void IsInitializedWithArgs<TBehaviour, TArgs>(TBehaviour behaviour, TArgs args)
-			where TBehaviour : ITestArgs<TArgs>
+		[Test]
+		public void Expect_ReplaceChild_FromLoaded_WithArgs_ToInitialize()
 		{
-			Assert.AreEqual(behaviour.Args, args);
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
+			var behaviour = root.gameObject.ReplaceChild(toReplace, loadedBehaviour, TEST_ARGS);
+			Assert.IsTrue(behaviour.DidInitialize);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_FromLoaded_WithArgs_ToDestroy()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
+			root.gameObject.ReplaceChild(toReplace, loadedBehaviour, TEST_ARGS);
+			Assert.IsTrue(toReplace == null);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_FromLoaded_WithArgs_ToCreateAsChild()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
+			var behaviour = root.gameObject.ReplaceChild(toReplace, loadedBehaviour, TEST_ARGS);
+			Assert.True(behaviour.transform.parent == root.transform);
+		}
+
+		[Test]
+		public void Expect_ReplaceChild_FromLoaded_WithArgs_ToInitialize_WithArgs()
+		{
+			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
+			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
+			var behaviour = root.gameObject.ReplaceChild(toReplace, loadedBehaviour, TEST_ARGS);
+			Assert.AreEqual(behaviour.Args, TEST_ARGS);
 		}
 
 		[OneTimeTearDown]
