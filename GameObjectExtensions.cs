@@ -165,7 +165,7 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Destroy a MonoBehaviour and reate a clone of the given TBehaviour as a child transform.
+		/// Destroy a MonoBehaviour and create a clone of the given TBehaviour as a child transform.
 		/// TBehaviour will be initialized automatically and then returned.
 		/// </summary>
 		/// <param name="toDestroy">The MonoBehaviour to destroy.</param>
@@ -180,7 +180,7 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Destroy a MonoBehaviour and reate a clone of the given TBehaviour as a child transform.
+		/// Destroy a MonoBehaviour and create a clone of the given TBehaviour as a child transform.
 		/// TBehaviour will be initialized with the given arguements automatically and then returned.
 		/// </summary>
 		/// <param name="toDestroy">The MonoBehaviour to destroy.</param>
