@@ -4,94 +4,94 @@ namespace DUCK.HieriarchyBehaviour
 {
 	public static class GameObjectExtensions
 	{
-		public static TBehaviour CreateChild<TBehaviour>(this GameObject gameObject)
+		public static TBehaviour CreateChild<TBehaviour>(this GameObject parent)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			var behaviour = Utils.CreateGameObjectWithBehaviour<TBehaviour>(gameObject);
+			var behaviour = Utils.CreateGameObjectWithBehaviour<TBehaviour>(parent);
 			behaviour.Initialize();
 			return behaviour;
 		}
 
-		public static TBehaviour CreateChild<TBehaviour, TArgs>(this GameObject gameObject, TArgs args)
+		public static TBehaviour CreateChild<TBehaviour, TArgs>(this GameObject parent, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			var behaviour = Utils.CreateGameObjectWithBehaviour<TBehaviour>(gameObject);
+			var behaviour = Utils.CreateGameObjectWithBehaviour<TBehaviour>(parent);
 			behaviour.Initialize(args);
 			return behaviour;
 		}
 
-		public static TBehaviour CreateChild<TBehaviour>(this GameObject gameObject, string path, bool worldPositionStay = true)
+		public static TBehaviour CreateChild<TBehaviour>(this GameObject parent, string path, bool worldPositionStay = true)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			var behaviour = Utils.InstantiateResource<TBehaviour>(path, gameObject, worldPositionStay);
+			var behaviour = Utils.InstantiateResource<TBehaviour>(path, parent, worldPositionStay);
 			behaviour.Initialize();
 			return behaviour;
 		}
 
-		public static TBehaviour CreateChild<TBehaviour, TArgs>(this GameObject gameObject, string path, TArgs args, bool worldPositionStay = true)
+		public static TBehaviour CreateChild<TBehaviour, TArgs>(this GameObject parent, string path, TArgs args, bool worldPositionStay = true)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			var behaviour = Utils.InstantiateResource<TBehaviour>(path, gameObject, worldPositionStay);
+			var behaviour = Utils.InstantiateResource<TBehaviour>(path, parent, worldPositionStay);
 			behaviour.Initialize(args);
 			return behaviour;
 		}
 
-		public static TBehaviour CreateChild<TBehaviour>(this GameObject gameObject, TBehaviour behaviourToClone)
+		public static TBehaviour CreateChild<TBehaviour>(this GameObject parent, TBehaviour behaviourToClone)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			var behaviour = Utils.CloneBehaviour(behaviourToClone, gameObject);
+			var behaviour = Utils.CloneBehaviour(behaviourToClone, parent);
 			behaviour.Initialize();
 			return behaviour;
 		}
 
-		public static TBehaviour CreateChild<TBehaviour, TArgs>(this GameObject gameObject, TBehaviour behaviourToClone, TArgs args)
+		public static TBehaviour CreateChild<TBehaviour, TArgs>(this GameObject parent, TBehaviour behaviourToClone, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			var behaviour = Utils.CloneBehaviour(behaviourToClone, gameObject);
+			var behaviour = Utils.CloneBehaviour(behaviourToClone, parent);
 			behaviour.Initialize(args);
 			return behaviour;
 		}
 
-		public static TBehaviour Replace<TBehaviour>(this GameObject gameObject, MonoBehaviour toDestroy)
+		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
 			Object.Destroy(toDestroy.gameObject);
-			return gameObject.CreateChild<TBehaviour>();
+			return parent.CreateChild<TBehaviour>();
 		}
 
-		public static TBehaviour Replace<TBehaviour, TArgs>(this GameObject gameObject, MonoBehaviour toDestroy, TArgs args)
+		public static TBehaviour ReplaceChild<TBehaviour, TArgs>(this GameObject parent, MonoBehaviour toDestroy, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
 			Object.Destroy(toDestroy.gameObject);
-			return gameObject.CreateChild<TBehaviour, TArgs>(args);
+			return parent.CreateChild<TBehaviour, TArgs>(args);
 		}
 
-		public static TBehaviour Replace<TBehaviour>(this GameObject gameObject, MonoBehaviour toDestroy, string path)
+		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy, string path)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
 			Object.Destroy(toDestroy.gameObject);
-			return gameObject.CreateChild<TBehaviour>(path);
+			return parent.CreateChild<TBehaviour>(path);
 		}
 
-		public static TBehaviour Replace<TBehaviour, TArgs>(this GameObject gameObject, MonoBehaviour toDestroy, string path, TArgs args)
+		public static TBehaviour ReplaceChild<TBehaviour, TArgs>(this GameObject parent, MonoBehaviour toDestroy, string path, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
 			Object.Destroy(toDestroy.gameObject);
-			return gameObject.CreateChild<TBehaviour, TArgs>(path, args);
+			return parent.CreateChild<TBehaviour, TArgs>(path, args);
 		}
 
-		public static TBehaviour Replace<TBehaviour>(this GameObject gameObject, MonoBehaviour toDestroy, TBehaviour toClone)
+		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy, TBehaviour toClone)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
 			Object.Destroy(toDestroy.gameObject);
-			return gameObject.CreateChild(toClone);
+			return parent.CreateChild(toClone);
 		}
 
-		public static TBehaviour Replace<TBehaviour, TArgs>(this GameObject gameObject, MonoBehaviour toDestroy, TBehaviour toClone, TArgs args)
+		public static TBehaviour ReplaceChild<TBehaviour, TArgs>(this GameObject parent, MonoBehaviour toDestroy, TBehaviour toClone, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
 			Object.Destroy(toDestroy.gameObject);
-			return gameObject.CreateChild(toClone, args);
+			return parent.CreateChild(toClone, args);
 		}
 	}
 }
