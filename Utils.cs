@@ -35,7 +35,7 @@ namespace DUCK.HieriarchyBehaviour
 
 		internal static void DestroyChild(GameObject parent, MonoBehaviour child)
 		{
-			if (child.transform.parent != parent)
+			if (child.transform.parent != parent.transform)
 			{
 				throw new ArgumentException(string.Format("{0} is not a child transform of {1}", child.name, parent.name));
 			}
