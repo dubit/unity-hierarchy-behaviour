@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace DUCK.HieriarchyBehaviour
 {
@@ -31,15 +33,20 @@ namespace DUCK.HieriarchyBehaviour
 			return behaviour;
 		}
 
-		internal static void Destroy(Object obj)
+		internal static void DestroyChild(GameObject parent, MonoBehaviour child)
 		{
+			if (child.transform.parent != parent.transform)
+			{
+				throw new ArgumentException(string.Format("{0} is not a child transform of {1}", child.name, parent.name));
+			}
+
 			if (Application.isEditor)
 			{
-				Object.DestroyImmediate(obj);
+				Object.DestroyImmediate(child.gameObject);
 			}
 			else
 			{
-				Object.Destroy(obj);
+				Object.Destroy(child.gameObject);
 			}
 		}
 	}
