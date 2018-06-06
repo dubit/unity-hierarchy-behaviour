@@ -55,42 +55,42 @@ namespace DUCK.HieriarchyBehaviour
 		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			Object.Destroy(toDestroy.gameObject);
+			Utils.Destroy(toDestroy.gameObject);
 			return parent.CreateChild<TBehaviour>();
 		}
 
 		public static TBehaviour ReplaceChild<TBehaviour, TArgs>(this GameObject parent, MonoBehaviour toDestroy, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			Object.Destroy(toDestroy.gameObject);
+			Utils.Destroy(toDestroy.gameObject);
 			return parent.CreateChild<TBehaviour, TArgs>(args);
 		}
 
 		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy, string path)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			Object.Destroy(toDestroy.gameObject);
+			Utils.Destroy(toDestroy.gameObject);
 			return parent.CreateChild<TBehaviour>(path);
 		}
 
 		public static TBehaviour ReplaceChild<TBehaviour, TArgs>(this GameObject parent, MonoBehaviour toDestroy, string path, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			Object.Destroy(toDestroy.gameObject);
+			Utils.Destroy(toDestroy.gameObject);
 			return parent.CreateChild<TBehaviour, TArgs>(path, args);
 		}
 
 		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy, TBehaviour toClone)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			Object.Destroy(toDestroy.gameObject);
+			Utils.Destroy(toDestroy.gameObject);
 			return parent.CreateChild(toClone);
 		}
 
 		public static TBehaviour ReplaceChild<TBehaviour, TArgs>(this GameObject parent, MonoBehaviour toDestroy, TBehaviour toClone, TArgs args)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			Object.Destroy(toDestroy.gameObject);
+			Utils.Destroy(toDestroy.gameObject);
 			return parent.CreateChild(toClone, args);
 		}
 	}

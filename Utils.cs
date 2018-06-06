@@ -30,5 +30,17 @@ namespace DUCK.HieriarchyBehaviour
 			behaviour.name = loadedBehaviour.name;
 			return behaviour;
 		}
+
+		internal static void Destroy(Object obj)
+		{
+			if (Application.isEditor)
+			{
+				Object.DestroyImmediate(obj);
+			}
+			else
+			{
+				Object.Destroy(obj);
+			}
+		}
 	}
 }

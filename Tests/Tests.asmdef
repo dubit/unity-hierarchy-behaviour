@@ -1,0 +1,14 @@
+{
+    "name": "DUCK.HierarchyBehaviour.Tests",
+    "references": [
+        "HierarchyBehaviour"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
