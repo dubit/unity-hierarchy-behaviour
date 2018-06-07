@@ -142,7 +142,7 @@ namespace DUCK.HieriarchyBehaviour
 		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy, string path, bool worldPositionStay = true)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			Object.Destroy(toDestroy.gameObject);
+			Utils.DestroyChild(parent, toDestroy);
 			return parent.CreateChild<TBehaviour>(path, worldPositionStay);
 		}
 
@@ -160,7 +160,7 @@ namespace DUCK.HieriarchyBehaviour
 		public static TBehaviour ReplaceChild<TBehaviour, TArgs>(this GameObject parent, MonoBehaviour toDestroy, string path, TArgs args, bool worldPositionStay = true)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			Object.Destroy(toDestroy.gameObject);
+			Utils.DestroyChild(parent, toDestroy);
 			return parent.CreateChild<TBehaviour, TArgs>(path, args, worldPositionStay);
 		}
 
