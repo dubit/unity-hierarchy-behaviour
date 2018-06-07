@@ -39,13 +39,13 @@ namespace DUCK.HieriarchyBehaviour
 		/// TBehaviour will be initialized automatically and then returned.
 		/// </summary>
 		/// <param name="path">The path to the resourced asset.</param>
-		/// <param name="worldPositionStay">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
+		/// <param name="worldPositionStays">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
 		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be added to the new GameObject.</typeparam>
 		/// <returns>The new TBehaviour</returns>
-		public static TBehaviour CreateChild<TBehaviour>(this GameObject parent, string path, bool worldPositionStay = true)
+		public static TBehaviour CreateChild<TBehaviour>(this GameObject parent, string path, bool worldPositionStays = true)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
-			var behaviour = Utils.InstantiateResource<TBehaviour>(path, parent, worldPositionStay);
+			var behaviour = Utils.InstantiateResource<TBehaviour>(path, parent, worldPositionStays);
 			behaviour.Initialize();
 			return behaviour;
 		}
@@ -56,14 +56,14 @@ namespace DUCK.HieriarchyBehaviour
 		/// </summary>
 		/// <param name="path">The path to the resourced asset.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
-		/// <param name="worldPositionStay">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
+		/// <param name="worldPositionStays">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
 		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be added to the new GameObject.</typeparam>
 		/// <typeparam name="TArgs">The type of arguements to be given on initialization.</typeparam>
 		/// <returns>The new TBehaviour</returns>
-		public static TBehaviour CreateChild<TBehaviour, TArgs>(this GameObject parent, string path, TArgs args, bool worldPositionStay = true)
+		public static TBehaviour CreateChild<TBehaviour, TArgs>(this GameObject parent, string path, TArgs args, bool worldPositionStays = true)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
-			var behaviour = Utils.InstantiateResource<TBehaviour>(path, parent, worldPositionStay);
+			var behaviour = Utils.InstantiateResource<TBehaviour>(path, parent, worldPositionStays);
 			behaviour.Initialize(args);
 			return behaviour;
 		}
@@ -136,14 +136,14 @@ namespace DUCK.HieriarchyBehaviour
 		/// </summary>
 		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <param name="path">The path to the resourced asset.</param>
-		/// <param name="worldPositionStay">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
+		/// <param name="worldPositionStays">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
 		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be created.</typeparam>
 		/// <returns>The new TBehaviour</returns>
-		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy, string path, bool worldPositionStay = true)
+		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy, string path, bool worldPositionStays= true)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
 			Utils.DestroyChild(parent, toDestroy);
-			return parent.CreateChild<TBehaviour>(path, worldPositionStay);
+			return parent.CreateChild<TBehaviour>(path, worldPositionStays);
 		}
 
 		/// <summary>
@@ -153,15 +153,15 @@ namespace DUCK.HieriarchyBehaviour
 		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <param name="path">The path to the resourced asset.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
-		/// <param name="worldPositionStay">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
+		/// <param name="worldPositionStays">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
 		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be created.</typeparam>
 		/// <typeparam name="TArgs">The type of arguements to be given on initialization.</typeparam>
 		/// <returns>The new TBehaviour</returns>
-		public static TBehaviour ReplaceChild<TBehaviour, TArgs>(this GameObject parent, MonoBehaviour toDestroy, string path, TArgs args, bool worldPositionStay = true)
+		public static TBehaviour ReplaceChild<TBehaviour, TArgs>(this GameObject parent, MonoBehaviour toDestroy, string path, TArgs args, bool worldPositionStays = true)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour<TArgs>
 		{
 			Utils.DestroyChild(parent, toDestroy);
-			return parent.CreateChild<TBehaviour, TArgs>(path, args, worldPositionStay);
+			return parent.CreateChild<TBehaviour, TArgs>(path, args, worldPositionStays);
 		}
 
 		/// <summary>

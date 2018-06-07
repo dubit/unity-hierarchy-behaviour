@@ -24,11 +24,11 @@ namespace DUCK.HieriarchyBehaviour
 			return behaviour;
 		}
 
-		internal static TBehaviour InstantiateResource<TBehaviour>(string path, GameObject parent, bool worldPositionStay = true)
+		internal static TBehaviour InstantiateResource<TBehaviour>(string path, GameObject parent, bool worldPositionStays = true)
 			where TBehaviour : MonoBehaviour
 		{
 			var loadedBehaviour = Resources.Load<TBehaviour>(path);
-			var behaviour = Object.Instantiate(loadedBehaviour, parent.transform, worldPositionStay);
+			var behaviour = Object.Instantiate(loadedBehaviour, parent.transform, worldPositionStays);
 			behaviour.name = loadedBehaviour.name;
 			return behaviour;
 		}
