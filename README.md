@@ -4,8 +4,8 @@
 Its a collection of GameObject extension methods to allow for runtime instantiation of MonoBehaviours that include an Initialize method that takes type-safe arguments.
 
 ## What are the Core Features?
-- CreateChild (From Resources, From Loaded or Instantiated)
-- ReplaceChild (From Resources, From Loaded or Instantiated)
+- CreateChild (New, Resources, Loaded or Instantiated)
+- ReplaceChild (New, Resources, Loaded or Instantiated)
 
 ## Why does it exist?
 The ability to easily add child game objects with behaviours, initialize them and pass in type-safe args
