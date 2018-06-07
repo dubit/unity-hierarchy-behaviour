@@ -62,39 +62,61 @@ namespace DUCK.HieriarchyBehaviour
 			AssetDatabase.Refresh();
 		}
 
+		[OneTimeTearDown]
+		public void OneTimeTearDown()
+		{
+			Object.DestroyImmediate(root.gameObject);
+
+			var prefabWithoutArgsPath = Application.dataPath + RESOURCE_PATH + PREFAB_WITHOUT_ARGS_RESOURCE_PATH + ".prefab";
+			File.Delete(prefabWithoutArgsPath);
+			File.Delete(prefabWithoutArgsPath + ".prefab.meta");
+			var prefabWithArgsPath = Application.dataPath + RESOURCE_PATH + PREFAB_WITH_ARGS_RESOURCE_PATH + ".prefab";
+			File.Delete(prefabWithArgsPath);
+			File.Delete(prefabWithArgsPath + ".prefab.meta");
+			AssetDatabase.Refresh();
+
+			if (!didResourcesExist)
+			{
+				Directory.Delete(Application.dataPath + RESOURCE_PATH);
+				File.Delete(Application.dataPath + "Resources.meta");
+			}
+
+			AssetDatabase.Refresh();
+		}
+
 		[Test]
-		public void Expect_CreateChild_ToInitialize()
+		public void Expect_CreateChild_New_ToInitialize()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviour>();
 			Assert.IsTrue(behaviour.DidInitialize);
 		}
 
 		[Test]
-		public void Expect_CreateChild_AsChild()
+		public void Expect_CreateChild_New_AsChild()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviour>();
-			Assert.IsTrue(behaviour.transform.parent == root.transform);
+			Assert.AreEqual(behaviour.transform.parent, root.transform);
 		}
 
 		[Test]
-		public void Expect_CreateChild_WithArgs_ToInitialize()
+		public void Expect_CreateChild_New_WithArgs_ToInitialize()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(TEST_ARGS);
 			Assert.IsTrue(behaviour.DidInitialize);
 		}
 
 		[Test]
-		public void Expect_CreateChild_WithArgs_AsChild()
+		public void Expect_CreateChild_New_WithArgs_AsChild()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(TEST_ARGS);
-			Assert.IsTrue(behaviour.transform.parent == root.transform);
+			Assert.AreEqual(behaviour.transform.parent, root.transform);
 		}
 
 		[Test]
-		public void Expect_CreateChild_WithArgs_ToInitialize_WithArgs()
+		public void Expect_CreateChild_New_WithArgs_ToInitialize_WithArgs()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(TEST_ARGS);
-			Assert.AreEqual(behaviour.Args, TEST_ARGS);
+			Assert.AreEqual(TEST_ARGS, behaviour.Args);
 		}
 
 		[Test]
@@ -108,7 +130,7 @@ namespace DUCK.HieriarchyBehaviour
 		public void Expect_CreateChild_FromResources_AsChild()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviour>(PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
-			Assert.IsTrue(behaviour.transform.parent == root.transform);
+			Assert.AreEqual(behaviour.transform.parent, root.transform);
 		}
 
 		[Test]
@@ -122,14 +144,14 @@ namespace DUCK.HieriarchyBehaviour
 		public void Expect_CreateChild_FromResources_WithArgs_AsChild()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
-			Assert.IsTrue(behaviour.transform.parent == root.transform);
+			Assert.AreEqual(behaviour.transform.parent, root.transform);
 		}
 
 		[Test]
 		public void Expect_CreateChild_FromResources_WithArgs_ToInitialize_WithArgs()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
-			Assert.AreEqual(behaviour.Args, TEST_ARGS);
+			Assert.AreEqual(TEST_ARGS, behaviour.Args);
 		}
 
 		[Test]
@@ -145,7 +167,7 @@ namespace DUCK.HieriarchyBehaviour
 		{
 			var loadedBehaviour = Resources.Load<HierarchyBehaviour>(PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.CreateChild(loadedBehaviour);
-			Assert.IsTrue(behaviour.transform.parent == root.transform);
+			Assert.AreEqual(behaviour.transform.parent, root.transform);
 		}
 
 		[Test]
@@ -161,7 +183,7 @@ namespace DUCK.HieriarchyBehaviour
 		{
 			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.CreateChild(loadedBehaviour, TEST_ARGS);
-			Assert.IsTrue(behaviour.transform.parent == root.transform);
+			Assert.AreEqual(behaviour.transform.parent, root.transform);
 		}
 
 		[Test]
@@ -169,11 +191,11 @@ namespace DUCK.HieriarchyBehaviour
 		{
 			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.CreateChild(loadedBehaviour, TEST_ARGS);
-			Assert.AreEqual(behaviour.Args, TEST_ARGS);
+			Assert.AreEqual(TEST_ARGS, behaviour.Args);
 		}
 
 		[Test]
-		public void Expect_ReplaceChild_ToDestroy()
+		public void Expect_ReplaceChild_New_ToDestroy()
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			root.gameObject.ReplaceChild<HierarchyBehaviour>(toReplace);
@@ -181,15 +203,15 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		[Test]
-		public void Expect_ReplaceChild_ToCreateAsChild()
+		public void Expect_ReplaceChild_New_ToCreateAsChild()
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, TEST_ARGS);
-			Assert.True(behaviour.transform.parent == root.transform);
+			Assert.AreEqual(behaviour.transform.parent, root.transform);
 		}
 
 		[Test]
-		public void Expect_ReplaceChild_ToInitialize()
+		public void Expect_ReplaceChild_New_ToInitialize()
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviour>(toReplace);
@@ -197,7 +219,7 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		[Test]
-		public void Expect_ReplaceChild_WithArgs_ToInitialize()
+		public void Expect_ReplaceChild_New_WithArgs_ToInitialize()
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, TEST_ARGS);
@@ -205,7 +227,7 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		[Test]
-		public void Expect_ReplaceChild_WithArgs_ToDestroy()
+		public void Expect_ReplaceChild_New_WithArgs_ToDestroy()
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, TEST_ARGS);
@@ -213,19 +235,19 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		[Test]
-		public void Expect_ReplaceChild_WithArgs_ToCreateAsChild()
+		public void Expect_ReplaceChild_New_WithArgs_ToCreateAsChild()
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, TEST_ARGS);
-			Assert.True(behaviour.transform.parent == root.transform);
+			Assert.AreEqual(behaviour.transform.parent, root.transform);
 		}
 
 		[Test]
-		public void Expect_ReplaceChild_WithArgs_ToInitialize_WithArgs()
+		public void Expect_ReplaceChild_New_WithArgs_ToInitialize_WithArgs()
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, TEST_ARGS);
-			Assert.AreEqual(behaviour.Args, TEST_ARGS);
+			Assert.AreEqual(TEST_ARGS, behaviour.Args);
 		}
 
 		[Test]
@@ -241,7 +263,7 @@ namespace DUCK.HieriarchyBehaviour
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviour>(toReplace, PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
-			Assert.True(behaviour.transform.parent == root.transform);
+			Assert.AreEqual(behaviour.transform.parent, root.transform);
 		}
 
 		[Test]
@@ -273,7 +295,7 @@ namespace DUCK.HieriarchyBehaviour
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
-			Assert.True(behaviour.transform.parent == root.transform);
+			Assert.AreEqual(behaviour.transform.parent, root.transform);
 		}
 
 		[Test]
@@ -281,7 +303,7 @@ namespace DUCK.HieriarchyBehaviour
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
-			Assert.AreEqual(behaviour.Args, TEST_ARGS);
+			Assert.AreEqual(TEST_ARGS, behaviour.Args);
 		}
 
 		[Test]
@@ -299,7 +321,7 @@ namespace DUCK.HieriarchyBehaviour
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var loadedBehaviour = Resources.Load<HierarchyBehaviour>(PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.ReplaceChild(toReplace, loadedBehaviour);
-			Assert.True(behaviour.transform.parent == root.transform);
+			Assert.AreEqual(behaviour.transform.parent, root.transform);
 		}
 
 		[Test]
@@ -335,7 +357,7 @@ namespace DUCK.HieriarchyBehaviour
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.ReplaceChild(toReplace, loadedBehaviour, TEST_ARGS);
-			Assert.True(behaviour.transform.parent == root.transform);
+			Assert.AreEqual(behaviour.transform.parent, root.transform);
 		}
 
 		[Test]
@@ -344,29 +366,7 @@ namespace DUCK.HieriarchyBehaviour
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.ReplaceChild(toReplace, loadedBehaviour, TEST_ARGS);
-			Assert.AreEqual(behaviour.Args, TEST_ARGS);
-		}
-
-		[OneTimeTearDown]
-		public void OneTimeTearDown()
-		{
-			Object.DestroyImmediate(root.gameObject);
-
-			var prefabWithoutArgsPath = Application.dataPath + RESOURCE_PATH + PREFAB_WITHOUT_ARGS_RESOURCE_PATH + ".prefab";
-			File.Delete(prefabWithoutArgsPath);
-			File.Delete(prefabWithoutArgsPath + ".prefab.meta");
-			var prefabWithArgsPath = Application.dataPath + RESOURCE_PATH + PREFAB_WITH_ARGS_RESOURCE_PATH + ".prefab";
-			File.Delete(prefabWithArgsPath);
-			File.Delete(prefabWithArgsPath + ".prefab.meta");
-			AssetDatabase.Refresh();
-
-			if (!didResourcesExist)
-			{
-				Directory.Delete(Application.dataPath + RESOURCE_PATH);
-				File.Delete(Application.dataPath + "Resources.meta");
-			}
-
-			AssetDatabase.Refresh();
+			Assert.AreEqual(TEST_ARGS, behaviour.Args);
 		}
 	}
 }
