@@ -93,7 +93,7 @@ You can also use ReplaceChild with resourced assets and loaded assets.
 var myClassWithArgs = gameObject.ReplaceChild<MyClassWithArgs>(toReplace, "MyResourcePath");
 ```
 ```C#
-var myClass = gameObject.ReplaceChild<MyClassWith>(toReplace, prefab);
+var myClass = gameObject.ReplaceChild<MyClass>(toReplace, prefab);
 ```
 
 ReplaceChild requires a `TBehaviour` to create or instantiate and an existing MonoBehaviour to Destroy.
