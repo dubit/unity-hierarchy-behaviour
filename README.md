@@ -1,4 +1,4 @@
-#unity-hierarchy-behaviour
+# unity-hierarchy-behaviour
 
 # What is it?
 Its a collection of GameObject extension methods to allow for runtime instantiation of MonoBehaviours that include an Initialize method that takes type-safe arguments.
