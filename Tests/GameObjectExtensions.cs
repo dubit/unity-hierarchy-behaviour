@@ -95,7 +95,7 @@ namespace DUCK.HieriarchyBehaviour
 		public void Expect_CreateChild_New_AsChild()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviour>();
-			Assert.AreEqual(behaviour.transform.parent, root.transform);
+			Assert.AreEqual(root.transform, behaviour.transform.parent);
 		}
 
 		[Test]
@@ -109,7 +109,7 @@ namespace DUCK.HieriarchyBehaviour
 		public void Expect_CreateChild_New_WithArgs_AsChild()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(TEST_ARGS);
-			Assert.AreEqual(behaviour.transform.parent, root.transform);
+			Assert.AreEqual(root.transform, behaviour.transform.parent);
 		}
 
 		[Test]
@@ -130,7 +130,7 @@ namespace DUCK.HieriarchyBehaviour
 		public void Expect_CreateChild_FromResources_AsChild()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviour>(PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
-			Assert.AreEqual(behaviour.transform.parent, root.transform);
+			Assert.AreEqual(root.transform, behaviour.transform.parent);
 		}
 
 		[Test]
@@ -144,7 +144,7 @@ namespace DUCK.HieriarchyBehaviour
 		public void Expect_CreateChild_FromResources_WithArgs_AsChild()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviourWithArgs, string>(PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
-			Assert.AreEqual(behaviour.transform.parent, root.transform);
+			Assert.AreEqual(root.transform, behaviour.transform.parent);
 		}
 
 		[Test]
@@ -167,7 +167,7 @@ namespace DUCK.HieriarchyBehaviour
 		{
 			var loadedBehaviour = Resources.Load<HierarchyBehaviour>(PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.CreateChild(loadedBehaviour);
-			Assert.AreEqual(behaviour.transform.parent, root.transform);
+			Assert.AreEqual(root.transform, behaviour.transform.parent);
 		}
 
 		[Test]
@@ -183,7 +183,7 @@ namespace DUCK.HieriarchyBehaviour
 		{
 			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.CreateChild(loadedBehaviour, TEST_ARGS);
-			Assert.AreEqual(behaviour.transform.parent, root.transform);
+			Assert.AreEqual(root.transform, behaviour.transform.parent);
 		}
 
 		[Test]
@@ -207,7 +207,7 @@ namespace DUCK.HieriarchyBehaviour
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, TEST_ARGS);
-			Assert.AreEqual(behaviour.transform.parent, root.transform);
+			Assert.AreEqual(root.transform, behaviour.transform.parent);
 		}
 
 		[Test]
@@ -239,7 +239,7 @@ namespace DUCK.HieriarchyBehaviour
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, TEST_ARGS);
-			Assert.AreEqual(behaviour.transform.parent, root.transform);
+			Assert.AreEqual(root.transform, behaviour.transform.parent);
 		}
 
 		[Test]
@@ -263,7 +263,7 @@ namespace DUCK.HieriarchyBehaviour
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviour>(toReplace, PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
-			Assert.AreEqual(behaviour.transform.parent, root.transform);
+			Assert.AreEqual(root.transform, behaviour.transform.parent);
 		}
 
 		[Test]
@@ -295,7 +295,7 @@ namespace DUCK.HieriarchyBehaviour
 		{
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var behaviour = root.gameObject.ReplaceChild<HierarchyBehaviourWithArgs, string>(toReplace, PREFAB_WITH_ARGS_RESOURCE_PATH, TEST_ARGS);
-			Assert.AreEqual(behaviour.transform.parent, root.transform);
+			Assert.AreEqual(root.transform, behaviour.transform.parent);
 		}
 
 		[Test]
@@ -321,7 +321,7 @@ namespace DUCK.HieriarchyBehaviour
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var loadedBehaviour = Resources.Load<HierarchyBehaviour>(PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.ReplaceChild(toReplace, loadedBehaviour);
-			Assert.AreEqual(behaviour.transform.parent, root.transform);
+			Assert.AreEqual(root.transform, behaviour.transform.parent);
 		}
 
 		[Test]
@@ -357,7 +357,7 @@ namespace DUCK.HieriarchyBehaviour
 			var toReplace = root.gameObject.CreateChild<HierarchyBehaviour>();
 			var loadedBehaviour = Resources.Load<HierarchyBehaviourWithArgs>(PREFAB_WITH_ARGS_RESOURCE_PATH);
 			var behaviour = root.gameObject.ReplaceChild(toReplace, loadedBehaviour, TEST_ARGS);
-			Assert.AreEqual(behaviour.transform.parent, root.transform);
+			Assert.AreEqual(root.transform, behaviour.transform.parent);
 		}
 
 		[Test]
