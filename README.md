@@ -1,10 +1,10 @@
 # unity-hierarchy-behaviour
 
 # What is it?
-Its a collection of GameObject extension methods to allow for runtime instantiation of MonoBehaviours as a child GameObject that include an Initialize method that takes type-safe arguments.
+Its a collection of GameObject extension methods to allow for runtime instantiation a MonoBehaviour that include an Initialize method that takes type-safe arguments.
 
 ## What are the Core Features?
-The ability to easily add child game objects with behaviours, initialize them and pass in type-safe args.
+The ability to easily add child game objects with a specified behaviour and initialize it with type-safe args.
 
 ## What are the benifits?
  * Control the flow of data
@@ -50,8 +50,8 @@ Without Arguements
 var myClass = gameObject.CreateChild<MyClass>();
 ```
 
-This will create a child new GameObject and apply the template class `TBehaviour`.  
-The template class must extend MonoBehaviour and implement `IHierarchyBehaviour` or `IHierarchyBehaviour<TArgs>`.
+This will create a child new GameObject and adds the component specified by the `TBehaviour` type parameter.
+The type parameter must extend MonoBehaviour and implement `IHierarchyBehaviour` or `IHierarchyBehaviour<TArgs>`.
 This will return the new instance of `TBehaviour`.
 
 ### CreateChild from resources
@@ -64,8 +64,8 @@ Without Arguements
 var myClass = gameObject.CreateChild<MyClass>("MyResourcePath");
 ```
 
-This will load and instantiate a asset of type `TBehaviour` from Unity's `Resources`.
-The template class must extend MonoBehaviour and implement `IHierarchyBehaviour` or `IHierarchyBehaviour<TArgs>`. 
+This will create a child new GameObject and adds the component specified by the `TBehaviour` type parameter.
+The type parameter must extend MonoBehaviour and implement `IHierarchyBehaviour` or `IHierarchyBehaviour<TArgs>`.
 This will return the new instance of `TBehaviour`.
 
 ### CreateChild from loaded
@@ -78,7 +78,8 @@ Without Arguements
 var myClass = gameObject.CreateChild<MyClass>(prefab);
 ```
 
-This will take a pre-existing (loaded or instantiated) `IHierarchyBehaviour` and clone it. The template class must extend MonoBehaviour and implement `IHierarchyBehaviour` or `IHierarchyBehaviour<TArgs>`. 
+This will take a pre-existing (loaded or instantiated) `IHierarchyBehaviour` and clone it.  
+The template class must extend MonoBehaviour and implement `IHierarchyBehaviour` or `IHierarchyBehaviour<TArgs>`.  
 This will return the new instance of `TBehaviour`.
 
 
@@ -100,6 +101,6 @@ var myClassWithArgs = gameObject.ReplaceChild<MyClassWithArgs>(toReplace, "MyRes
 var myClass = gameObject.ReplaceChild<MyClass>(toReplace, prefab);
 ```
 
-ReplaceChild requires a `TBehaviour` to create or instantiate and an existing MonoBehaviour to Destroy.
-The template class must extend MonoBehaviour and implement `IHierarchyBehaviour` or `IHierarchyBehaviour<TArgs>`. 
+This will destroy the given child MonoBehaviour and create a child new GameObject and adds the component specified by the `TBehaviour` type parameter.  
+The type parameter must extend MonoBehaviour and implement `IHierarchyBehaviour` or `IHierarchyBehaviour<TArgs>`.  
 This will return the new instance of `TBehaviour`.  
