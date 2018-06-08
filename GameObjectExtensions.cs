@@ -5,10 +5,10 @@ namespace DUCK.HieriarchyBehaviour
 	public static class GameObjectExtensions
 	{
 		/// <summary>
-		/// Create a new GameObject as a child transform that has the given TBehaviour component.
-		/// TBehaviour will be initialized automatically and then returned.
+		/// Creates a child GameObject with the given TBehaviour component.
+		/// TBehaviour will be initialized automatically and returned.
 		/// </summary>
-		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be added to the new GameObject.</typeparam>
+		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be added to the new child GameObject.</typeparam>
 		/// <returns>The new TBehaviour</returns>
 		public static TBehaviour CreateChild<TBehaviour>(this GameObject parent)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
@@ -19,11 +19,11 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Create a new GameObject as a child transform that has the given TBehaviour component.
-		/// TBehaviour will be initialized with the given arguements automatically and then returned.
+		/// Creates a child GameObject with the given TBehaviour component.
+		/// TBehaviour will be initialized with the given arguements automatically and returned.
 		/// </summary>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
-		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be added to the new GameObject.</typeparam>
+		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be added to the new child GameObject.</typeparam>
 		/// <typeparam name="TArgs">The type of arguements to be given on initialization.</typeparam>
 		/// <returns>The new TBehaviour</returns>
 		public static TBehaviour CreateChild<TBehaviour, TArgs>(this GameObject parent, TArgs args)
@@ -35,8 +35,8 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Using the given path to load and create the asset as a child transform that has the given TBehaviour component.
-		/// TBehaviour will be initialized automatically and then returned.
+		/// Creates a child GameObject, by loading from resources and instantiating.
+		/// TBehaviour will be initialized automatically and returned.
 		/// </summary>
 		/// <param name="path">The path to the resourced asset.</param>
 		/// <param name="worldPositionStays">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
@@ -51,8 +51,8 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Using the given path to load and create the asset as a child transform that has the given TBehaviour component.
-		/// TBehaviour will be initialized with the given arguements automatically and then returned.
+		/// Creates a child GameObject, by loading from resources and instantiating.
+		/// TBehaviour will be initialized with the given arguements automatically and returned.
 		/// </summary>
 		/// <param name="path">The path to the resourced asset.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
@@ -69,8 +69,8 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Create a clone of the given TBehaviour as a child transform.
-		/// TBehaviour will be initialized automatically and then returned.
+		/// Creates a clone of the given TBehaviour as a child transform.
+		/// TBehaviour will be initialized automatically and returned.
 		/// </summary>
 		/// <param name="toClone">The GameObject to clone.</param>
 		/// <typeparam name="TBehaviour">The type of MonoBehaviour that is being cloned.</typeparam>
@@ -84,8 +84,8 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Create a clone of the given TBehaviour as a child transform.
-		/// TBehaviour will be initialized with the given arguements automatically and then returned.
+		/// Creates a clone of the given TBehaviour as a child transform.
+		/// TBehaviour will be initialized with the given arguements automatically and returned.
 		/// </summary>
 		/// <param name="toClone">The GameObject to clone.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
@@ -101,8 +101,8 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Destroy a child MonoBehaviour and create a new GameObject as a child transform that has the given TBehaviour component.
-		/// TBehaviour will be initialized automatically and then returned.
+		/// Destroys the child MonoBehaviour and creates a child GameObject with the given TBehaviour component.
+		/// TBehaviour will be initialized automatically and returned.
 		/// </summary>
 		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be created.</typeparam>
@@ -115,8 +115,8 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Destroy a child MonoBehaviour and create a new GameObject as a child transform that has the given TBehaviour component.
-		/// TBehaviour will be initialized with the given arguements automatically and then returned.
+		/// Destroys the child MonoBehaviour and creates a child GameObject with the given TBehaviour component.
+		/// TBehaviour will be initialized with the given arguements automatically and returned.
 		/// </summary>
 		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
@@ -131,15 +131,15 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Destroy a child MonoBehaviour, then using the given path to load and create the asset as a child transform that has the given TBehaviour component.
-		/// TBehaviour will be initialized automatically and then returned.
+		/// Destroys the child MonoBehaviour and creates a child GameObject, by loading from resources and instantiating.
+		/// TBehaviour will be initialized automatically and returned.
 		/// </summary>
 		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <param name="path">The path to the resourced asset.</param>
 		/// <param name="worldPositionStays">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
 		/// <typeparam name="TBehaviour">The type of MonoBehaviour to be created.</typeparam>
 		/// <returns>The new TBehaviour</returns>
-		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy, string path, bool worldPositionStays= true)
+		public static TBehaviour ReplaceChild<TBehaviour>(this GameObject parent, MonoBehaviour toDestroy, string path, bool worldPositionStays = true)
 			where TBehaviour : MonoBehaviour, IHierarchyBehaviour
 		{
 			Utils.DestroyChild(parent, toDestroy);
@@ -147,8 +147,8 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Destroy a child MonoBehaviour, then using the given path to load and create the asset as a child transform that has the given TBehaviour component.
-		/// TBehaviour will be initialized with the given arguements automatically and then returned.
+		/// Destroys the child MonoBehaviour and creates a child GameObject, by loading from resources and instantiating.
+		/// TBehaviour will be initialized with the given arguements automatically and returned.
 		/// </summary>
 		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <param name="path">The path to the resourced asset.</param>
@@ -165,8 +165,8 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Destroy a child MonoBehaviour and create a clone of the given TBehaviour as a child transform.
-		/// TBehaviour will be initialized automatically and then returned.
+		/// Destroys the child MonoBehaviour and creates a clone of the given TBehaviour as a child transform.
+		/// TBehaviour will be initialized automatically and returned.
 		/// </summary>
 		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <param name="toClone">The GameObject to clone.</param>
@@ -180,8 +180,8 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		/// <summary>
-		/// Destroy a child MonoBehaviour and create a clone of the given TBehaviour as a child transform.
-		/// TBehaviour will be initialized with the given arguements automatically and then returned.
+		/// Destroys the child MonoBehaviour and creates a clone of the given TBehaviour as a child transform.
+		/// TBehaviour will be initialized with the given arguements automatically and returned.
 		/// </summary>
 		/// <param name="toDestroy">The child MonoBehaviour to destroy.</param>
 		/// <param name="toClone">The GameObject to clone.</param>
