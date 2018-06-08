@@ -12,6 +12,9 @@ The ability to easily add child game objects with a specified `IHierarchyBehavio
  * Visualize that responsibility
  * Control lifecycles
 
+## What are the requirements?
+ * Unity 2018.x
+
 ## How to use it.
 HierarchyBehaviour is entirely run via `GameObject` Extension methods for creation and interfaces for implementation.
 
