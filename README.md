@@ -4,7 +4,7 @@
 Its a collection of GameObject extension methods to allow for runtime instantiation a MonoBehaviour that include an Initialize method that takes type-safe arguments.
 
 ## What are the Core Features?
-The ability to easily add child game objects with a specified behaviour and initialize it with type-safe args.
+The ability to easily add child game objects with a specified `IHierarchyBehaviour` that can be initialize with type-safe args.
 
 ## What are the benifits?
  * Control the flow of data
