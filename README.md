@@ -4,8 +4,10 @@
 Its a collection of GameObject extension methods to allow for runtime instantiation of MonoBehaviours as a child GameObject that include an Initialize method that takes type-safe arguments.
 
 ## What are the Core Features?
-- CreateChild (New, Resources, Loaded or Instantiated)
-- ReplaceChild (New, Resources, Loaded or Instantiated)
+ * Control the flow of data
+ * Divide responsibility of components
+ * Visualize that responsibility
+ * Control lifecycles
 
 ## Why does it exist?
 The ability to easily add child game objects with behaviours, initialize them and pass in type-safe args.
@@ -33,6 +35,8 @@ public class MyClassWithArgs : MonoBehaviour, IHierarchyBehaviour<CustomArgs>
 ```
 
 The Initialize methods are automatically called by the GameObjectExtention methods used to create the new instance.
+- CreateChild (New, Resources, Loaded or Instantiated)
+- ReplaceChild (New, Resources, Loaded or Instantiated)
 
 However you can just add your class that implements `IHierarchyBehaviour` and choose to call Initialize when you prefer to.
 
