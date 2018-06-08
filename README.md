@@ -4,13 +4,13 @@
 Its a collection of GameObject extension methods to allow for runtime instantiation of MonoBehaviours as a child GameObject that include an Initialize method that takes type-safe arguments.
 
 ## What are the Core Features?
+The ability to easily add child game objects with behaviours, initialize them and pass in type-safe args.
+
+## What are the benifits?
  * Control the flow of data
  * Divide responsibility of components
  * Visualize that responsibility
  * Control lifecycles
-
-## Why does it exist?
-The ability to easily add child game objects with behaviours, initialize them and pass in type-safe args.
 
 ## How to use it.
 HierarchyBehaviour is entirely run via `GameObject` Extension methods for creation and interfaces for implementation.
