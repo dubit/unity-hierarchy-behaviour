@@ -1,14 +1,14 @@
 # unity-hierarchy-behaviour
 
 # What is it?
-Its a collection of GameObject extension methods to allow for runtime instantiation of MonoBehaviours that include an Initialize method that takes type-safe arguments.
+Its a collection of GameObject extension methods to allow for runtime instantiation of MonoBehaviours as a child GameObject that include an Initialize method that takes type-safe arguments.
 
 ## What are the Core Features?
 - CreateChild (New, Resources, Loaded or Instantiated)
 - ReplaceChild (New, Resources, Loaded or Instantiated)
 
 ## Why does it exist?
-The ability to easily add child game objects with behaviours, initialize them and pass in type-safe args
+The ability to easily add child game objects with behaviours, initialize them and pass in type-safe args.
 
 ## How to use it.
 HierarchyBehaviour is entirely run via `GameObject` Extension methods for creation and interfaces for implementation.
