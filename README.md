@@ -82,7 +82,7 @@ var myClass = gameObject.CreateChild<MyClass>(prefab);
 ```
 
 This will take a pre-existing (loaded or instantiated) `IHierarchyBehaviour` and clone it.  
-The template class must extend MonoBehaviour and implement `IHierarchyBehaviour` or `IHierarchyBehaviour<TArgs>`.  
+The type parameter must extend MonoBehaviour and implement `IHierarchyBehaviour` or `IHierarchyBehaviour<TArgs>`.  
 This will return the new instance of `TBehaviour`.
 
 
