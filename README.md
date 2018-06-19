@@ -66,6 +66,10 @@ Without Arguements
 ```C#
 var myClass = gameObject.CreateChild<MyClass>("MyResourcePath");
 ```
+GameObject
+```C#
+var myGameObject = gameObject.CreateChild(path: "MyResourcePath");
+```
 
 This will create a child new GameObject and adds the component specified by the `TBehaviour` type parameter.
 The type parameter must extend MonoBehaviour and implement `IHierarchyBehaviour` or `IHierarchyBehaviour<TArgs>`.
@@ -79,6 +83,10 @@ var myClassWithArgs = gameObject.CreateChild<MyClassWithArgs>(prefab, new Custom
 Without Arguements
 ```C#
 var myClass = gameObject.CreateChild<MyClass>(prefab);
+```
+GameObject
+```C#
+   var myGameObject = gameObject.CreateChild(prefab.gameObject);
 ```
 
 This will take a pre-existing (loaded or instantiated) `IHierarchyBehaviour` and clone it.  
