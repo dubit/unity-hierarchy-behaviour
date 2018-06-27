@@ -6,7 +6,15 @@ namespace DUCK.HieriarchyBehaviour
 {
 	internal static class Utils
 	{
-		internal static TBehaviour CloneBehaviour<TBehaviour>(TBehaviour behaviourToClone, GameObject parent)
+		public static GameObject CloneGameObject(GameObject gameObjectToClone, GameObject parent)
+		{
+			var gameObject = Object.Instantiate(gameObjectToClone, parent.transform);
+			gameObject.name = gameObjectToClone.name;
+			gameObject.transform.localPosition = Vector3.zero;
+			return gameObject;
+		}
+
+		public static TBehaviour CloneBehaviour<TBehaviour>(TBehaviour behaviourToClone, GameObject parent)
 			where TBehaviour : MonoBehaviour
 		{
 			var behaviour = Object.Instantiate(behaviourToClone, parent.transform);
@@ -15,7 +23,7 @@ namespace DUCK.HieriarchyBehaviour
 			return behaviour;
 		}
 
-		internal static TBehaviour CreateGameObjectWithBehaviour<TBehaviour>(GameObject parent)
+		public static TBehaviour CreateGameObjectWithBehaviour<TBehaviour>(GameObject parent)
 			where TBehaviour : MonoBehaviour
 		{
 			var behaviour = new GameObject(typeof(TBehaviour).Name).AddComponent<TBehaviour>();
@@ -24,16 +32,16 @@ namespace DUCK.HieriarchyBehaviour
 			return behaviour;
 		}
 
-		internal static TBehaviour InstantiateResource<TBehaviour>(string path, GameObject parent, bool worldPositionStays = true)
-			where TBehaviour : MonoBehaviour
+		public static TObject InstantiateResource<TObject>(string path, GameObject parent, bool worldPositionStays = true) 
+			where TObject : Object
 		{
-			var loadedBehaviour = Resources.Load<TBehaviour>(path);
+			var loadedBehaviour = Resources.Load<TObject>(path);
 			var behaviour = Object.Instantiate(loadedBehaviour, parent.transform, worldPositionStays);
 			behaviour.name = loadedBehaviour.name;
 			return behaviour;
 		}
 
-		internal static void DestroyChild(GameObject parent, MonoBehaviour child)
+		public static void DestroyChild(GameObject parent, MonoBehaviour child)
 		{
 			if (child.transform.parent != parent.transform)
 			{

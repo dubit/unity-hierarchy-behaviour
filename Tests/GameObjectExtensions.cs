@@ -85,6 +85,22 @@ namespace DUCK.HieriarchyBehaviour
 		}
 
 		[Test]
+		public void Expect_CreateChild_GameObject_AsChild()
+		{
+			var toClone = new GameObject("GameObject To Clone");
+			toClone.transform.SetParent(root.transform);
+			var gameObject = root.gameObject.CreateChild(toClone);
+			Assert.AreEqual(root.transform, gameObject.transform.parent);
+		}
+
+		[Test]
+		public void Expect_CreateChild_GameObject_FromResources_AsChild()
+		{
+			var gameObject = root.gameObject.CreateChild(path: PREFAB_WITHOUT_ARGS_RESOURCE_PATH);
+			Assert.AreEqual(root.transform, gameObject.transform.parent);
+		}
+
+		[Test]
 		public void Expect_CreateChild_New_ToInitialize()
 		{
 			var behaviour = root.gameObject.CreateChild<HierarchyBehaviour>();
