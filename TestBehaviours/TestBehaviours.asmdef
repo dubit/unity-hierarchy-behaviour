@@ -1,12 +1,9 @@
 {
-    "name": "DUCK.HierarchyBehaviour.Tests",
+    "name": "DUCK.HierarchyBehaviour.TestBehaviours",
     "references": [
-        "DUCK.HierarchyBehaviour.TestBehaviours",
         "HierarchyBehaviour"
     ],
-    "optionalUnityReferences": [
-        "TestAssemblies"
-    ],
+    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
