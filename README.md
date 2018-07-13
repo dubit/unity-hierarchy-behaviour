@@ -43,6 +43,42 @@ The Initialize methods are automatically called by the GameObjectExtention metho
 
 However you can just add your class that implements `IHierarchyBehaviour` and choose to call Initialize when you prefer to.
 
+In addition you can also implement multiple `IHierarchyBehaviour`'s, for example:
+```c#
+public class LightEstimation : MonoBehaviour, IHierarchyBehaviour, IHierarchyBehaviour<Light[]>
+{
+    private Light[] lights;
+
+    public void Initialize()
+    {
+        lights = FindObjectsOfType<Light>();
+    }
+    
+    public void Initialize(params Light[] lights)
+    {
+        this.lights = lights;
+    }
+}
+```
+In this case the class `LightEstimation` has the option to be initialized via  
+`gameObject.CreateChild<LightEstimation>();` in which it will call `Initalize()` with no args.  
+
+or we can do  
+```
+gameObject.CreateChild<LightEstimation, Light[]>(new[]
+{
+    directionalLight
+});
+```
+If you already have reference to it you can simply do  
+```c#
+lightEstimation.Initialize();
+```
+or  
+```c#
+lightEstimation.Initalize(directionalLight, pointLight);
+```
+
 ### CreateChild
 With Arguements
 ```C#
@@ -66,6 +102,10 @@ Without Arguements
 ```C#
 var myClass = gameObject.CreateChild<MyClass>("MyResourcePath");
 ```
+GameObject
+```C#
+var myGameObject = gameObject.CreateChild(path: "MyResourcePath");
+```
 
 This will create a child new GameObject and adds the component specified by the `TBehaviour` type parameter.
 The type parameter must extend MonoBehaviour and implement `IHierarchyBehaviour` or `IHierarchyBehaviour<TArgs>`.
@@ -79,6 +119,10 @@ var myClassWithArgs = gameObject.CreateChild<MyClassWithArgs>(prefab, new Custom
 Without Arguements
 ```C#
 var myClass = gameObject.CreateChild<MyClass>(prefab);
+```
+GameObject
+```C#
+   var myGameObject = gameObject.CreateChild(prefab.gameObject);
 ```
 
 This will take a pre-existing (loaded or instantiated) `IHierarchyBehaviour` and clone it.  

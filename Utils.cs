@@ -6,34 +6,42 @@ namespace DUCK.HieriarchyBehaviour
 {
 	internal static class Utils
 	{
-		internal static TBehaviour CloneBehaviour<TBehaviour>(TBehaviour behaviourToClone, GameObject parent)
-			where TBehaviour : MonoBehaviour
+		public static GameObject CloneGameObject(GameObject gameObjectToClone, GameObject parent)
 		{
-			var behaviour = Object.Instantiate(behaviourToClone, parent.transform);
-			behaviour.name = behaviourToClone.name;
-			behaviour.transform.localPosition = Vector3.zero;
-			return behaviour;
+			var gameObject = Object.Instantiate(gameObjectToClone, parent.transform);
+			gameObject.name = gameObjectToClone.name;
+			gameObject.transform.localPosition = Vector3.zero;
+			return gameObject;
 		}
 
-		internal static TBehaviour CreateGameObjectWithBehaviour<TBehaviour>(GameObject parent)
-			where TBehaviour : MonoBehaviour
+		public static TComponent CloneComponent<TComponent>(TComponent componentToClone, GameObject parent)
+			where TComponent : Component
 		{
-			var behaviour = new GameObject(typeof(TBehaviour).Name).AddComponent<TBehaviour>();
-			behaviour.transform.SetParent(parent.transform);
-			behaviour.transform.localPosition = Vector3.zero;
-			return behaviour;
+			var component = Object.Instantiate(componentToClone, parent.transform);
+			component.name = componentToClone.name;
+			component.transform.localPosition = Vector3.zero;
+			return component;
 		}
 
-		internal static TBehaviour InstantiateResource<TBehaviour>(string path, GameObject parent, bool worldPositionStays = true)
-			where TBehaviour : MonoBehaviour
+		public static TComponent CreateGameObjectWithComponent<TComponent>(GameObject parent)
+			where TComponent : Component
 		{
-			var loadedBehaviour = Resources.Load<TBehaviour>(path);
+			var component = new GameObject(typeof(TComponent).Name).AddComponent<TComponent>();
+			component.transform.SetParent(parent.transform);
+			component.transform.localPosition = Vector3.zero;
+			return component;
+		}
+
+		public static TObject InstantiateResource<TObject>(string path, GameObject parent, bool worldPositionStays = true)
+			where TObject : Object
+		{
+			var loadedBehaviour = Resources.Load<TObject>(path);
 			var behaviour = Object.Instantiate(loadedBehaviour, parent.transform, worldPositionStays);
 			behaviour.name = loadedBehaviour.name;
 			return behaviour;
 		}
 
-		internal static void DestroyChild(GameObject parent, MonoBehaviour child)
+		public static void DestroyChild(GameObject parent, Component child)
 		{
 			if (child.transform.parent != parent.transform)
 			{
