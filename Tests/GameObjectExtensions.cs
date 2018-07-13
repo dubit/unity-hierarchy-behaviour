@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using DUCK.HieriarchyBehaviour.TestBehaviours;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
@@ -12,28 +13,6 @@ namespace DUCK.HieriarchyBehaviour
 		private const string PREFAB_WITHOUT_ARGS_RESOURCE_PATH = "PrefabWithoutArgs";
 		private const string PREFAB_WITH_ARGS_RESOURCE_PATH = "PrefabWithArgs";
 		private const string RESOURCE_PATH = "/Resources/";
-
-		private class HierarchyBehaviourWithArgs : MonoBehaviour, IHierarchyBehaviour<string>
-		{
-			public string Args { get; private set; }
-			public bool DidInitialize { get; private set; }
-
-			public void Initialize(string args)
-			{
-				DidInitialize = true;
-				Args = args;
-			}
-		}
-
-		private class HierarchyBehaviour : MonoBehaviour, IHierarchyBehaviour
-		{
-			public bool DidInitialize { get; private set; }
-
-			public void Initialize()
-			{
-				DidInitialize = true;
-			}
-		}
 
 		private HierarchyBehaviour root;
 		private HierarchyBehaviour prefabBehaviour;
@@ -69,16 +48,16 @@ namespace DUCK.HieriarchyBehaviour
 
 			var prefabWithoutArgsPath = Application.dataPath + RESOURCE_PATH + PREFAB_WITHOUT_ARGS_RESOURCE_PATH + ".prefab";
 			File.Delete(prefabWithoutArgsPath);
-			File.Delete(prefabWithoutArgsPath + ".prefab.meta");
+			File.Delete(prefabWithoutArgsPath + ".meta");
 			var prefabWithArgsPath = Application.dataPath + RESOURCE_PATH + PREFAB_WITH_ARGS_RESOURCE_PATH + ".prefab";
 			File.Delete(prefabWithArgsPath);
-			File.Delete(prefabWithArgsPath + ".prefab.meta");
+			File.Delete(prefabWithArgsPath + ".meta");
 			AssetDatabase.Refresh();
 
 			if (!didResourcesExist)
 			{
 				Directory.Delete(Application.dataPath + RESOURCE_PATH);
-				File.Delete(Application.dataPath + "Resources.meta");
+				File.Delete(Application.dataPath + "/Resources.meta");
 			}
 
 			AssetDatabase.Refresh();
