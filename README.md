@@ -43,6 +43,42 @@ The Initialize methods are automatically called by the GameObjectExtention metho
 
 However you can just add your class that implements `IHierarchyBehaviour` and choose to call Initialize when you prefer to.
 
+In addition you can also implement multiple `IHierarchyBehaviour`'s, for example:
+```c#
+public class LightEstimation : MonoBehaviour, IHierarchyBehaviour, IHierarchyBehaviour<Light[]>
+{
+    private Light[] lights;
+
+    public void Initialize()
+    {
+        lights = FindObjectsOfType<Light>();
+    }
+    
+    public void Initialize(params Light[] lights)
+    {
+        this.lights = lights;
+    }
+}
+```
+In this case the class `LightEstimation` has the option to be initialized via  
+`gameObject.CreateChild<LightEstimation>();` in which it will call `Initalize()` with no args.  
+
+or we can do  
+```
+gameObject.CreateChild<LightEstimation, Light[]>(new[]
+{
+    directionalLight
+});
+```
+If you already have reference to it you can simply do  
+```c#
+lightEstimation.Initialize();
+```
+or  
+```c#
+lightEstimation.Initalize(directionalLight, pointLight);
+```
+
 ### CreateChild
 With Arguements
 ```C#
