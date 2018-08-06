@@ -1,6 +1,6 @@
 # unity-hierarchy-behaviour
 
-# What is it?
+## What is it?
 Its a collection of GameObject extension methods to allow for runtime instantiation a MonoBehaviour that include an Initialize method that takes type-safe arguments.
 
 ## What are the Core Features?
