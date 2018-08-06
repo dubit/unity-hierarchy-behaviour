@@ -1,6 +1,6 @@
 # unity-hierarchy-behaviour
 
-# What is it?
+## What is it?
 Its a collection of GameObject extension methods to allow for runtime instantiation a MonoBehaviour that include an Initialize method that takes type-safe arguments.
 
 ## What are the Core Features?
@@ -15,7 +15,7 @@ The ability to easily add child game objects with a specified `IHierarchyBehavio
 ## What are the requirements?
  * Unity 2018.x
 
-## How to use it.
+## How to use it
 HierarchyBehaviour is entirely run via `GameObject` Extension methods for creation and interfaces for implementation.
 
 ```c#
