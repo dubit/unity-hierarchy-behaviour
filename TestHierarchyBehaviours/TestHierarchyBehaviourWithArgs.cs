@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace DUCK.HieriarchyBehaviour.TestBehaviours
+namespace DUCK.HieriarchyBehaviour.TestHierarchyBehaviours
 {
 	[AddComponentMenu("")]
-	public class HierarchyBehaviourWithArgs : MonoBehaviour, IHierarchyBehaviour<string>
+	public class TestHierarchyBehaviourWithArgs : MonoBehaviour, IHierarchyBehaviour<string>
 	{
 		public string Args { get; private set; }
 		public bool DidInitialize { get; private set; }

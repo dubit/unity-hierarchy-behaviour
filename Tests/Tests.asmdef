@@ -1,7 +1,7 @@
 {
     "name": "DUCK.HierarchyBehaviour.Tests",
     "references": [
-        "DUCK.HierarchyBehaviour.TestBehaviours",
+        "TestHierarchyBehaviours",
         "HierarchyBehaviour"
     ],
     "optionalUnityReferences": [
