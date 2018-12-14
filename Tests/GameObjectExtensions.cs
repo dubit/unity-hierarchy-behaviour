@@ -1,10 +1,10 @@
 ﻿using System.IO;
-using DUCK.HieriarchyBehaviour.TestHierarchyBehaviours;
+using Duck.HieriarchyBehaviour.Tests.Behaviours;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
-namespace DUCK.HieriarchyBehaviour
+namespace Duck.HieriarchyBehaviour.Tests
 {
 	[TestFixture]
 	internal class GameObjectExtensions
