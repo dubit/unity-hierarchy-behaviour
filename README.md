@@ -122,7 +122,7 @@ var myClass = gameObject.CreateChild<MyClass>(prefab);
 ```
 GameObject
 ```C#
-   var myGameObject = gameObject.CreateChild(prefab.gameObject);
+var myGameObject = gameObject.CreateChild(prefab.gameObject);
 ```
 
 This will take a pre-existing (loaded or instantiated) `IHierarchyBehaviour` and clone it.  
