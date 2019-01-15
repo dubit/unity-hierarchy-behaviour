@@ -80,6 +80,16 @@ lightEstimation.Initalize(directionalLight, pointLight);
 ```
 
 ### CreateChild
+
+With Name
+```C#
+var myGameObject = gameObject.CreateChild("HelloWorld");
+```
+Without Name
+```C#
+var myGameObject = gameObject.CreateChild();
+```
+
 With Arguements
 ```C#
 var myClassWithArgs = gameObject.CreateChild<MyClassWithArgs, CustomArgs>(new CustomArgs("HelloWorld"));
