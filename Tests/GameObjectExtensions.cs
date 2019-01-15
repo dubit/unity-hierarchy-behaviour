@@ -64,7 +64,7 @@ namespace Duck.HieriarchyBehaviour.Tests
 		}
 
 		[Test]
-		public void Expect_CreateChild_GameObject()
+		public void Expect_CreateChild_GameObject_AsChild()
 		{
 			var gameObject = root.gameObject.CreateChild();
 			Assert.IsNotNull(gameObject);
@@ -82,7 +82,7 @@ namespace Duck.HieriarchyBehaviour.Tests
 		}
 
 		[Test]
-		public void Expect_CreateChild_GameObject_AsChild()
+		public void Expect_CreateChild_Cloned_GameObject_AsChild()
 		{
 			var toClone = new GameObject("GameObject To Clone");
 			toClone.transform.SetParent(root.transform);
