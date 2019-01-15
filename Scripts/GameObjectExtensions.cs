@@ -9,7 +9,7 @@ namespace Duck.HieriarchyBehaviour
 		/// </summary>
 		/// <param name="name">The desired GameObject name</param>
 		/// <returns>The new GameObject</returns>
-		public static GameObject CreateChild(this GameObject parent, string name)
+		public static GameObject CreateChild(this GameObject parent, string name = "GameObject")
 		{
 			return Utils.CreateChildGameObject(parent, name);
 		}

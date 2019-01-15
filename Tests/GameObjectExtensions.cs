@@ -64,6 +64,16 @@ namespace Duck.HieriarchyBehaviour.Tests
 		}
 
 		[Test]
+		public void Expect_CreateChild_GameObject_With_Name_AsChild()
+		{
+			const string GAME_OBJECT_NAME = "Test Name";
+			var gameObject = root.gameObject.CreateChild(GAME_OBJECT_NAME);
+			Assert.IsNotNull(gameObject);
+			Assert.AreEqual(GAME_OBJECT_NAME, gameObject.name);
+			Assert.AreEqual(root.transform, gameObject.transform.parent);
+		}
+
+		[Test]
 		public void Expect_CreateChild_GameObject_AsChild()
 		{
 			var toClone = new GameObject("GameObject To Clone");
