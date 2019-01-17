@@ -90,7 +90,7 @@ Without Name
 var myGameObject = gameObject.CreateChild();
 ```
 
-With Arguements
+With Arguments
 ```C#
 var myClassWithArgs = gameObject.CreateChild<MyClassWithArgs, CustomArgs>(new CustomArgs("HelloWorld"));
 ```
