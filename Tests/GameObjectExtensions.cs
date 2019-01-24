@@ -1,10 +1,10 @@
 ﻿using System.IO;
-using DUCK.HieriarchyBehaviour.TestHierarchyBehaviours;
+using Duck.HieriarchyBehaviour.Tests.Behaviours;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
-namespace DUCK.HieriarchyBehaviour
+namespace Duck.HieriarchyBehaviour.Tests
 {
 	[TestFixture]
 	internal class GameObjectExtensions
@@ -65,6 +65,24 @@ namespace DUCK.HieriarchyBehaviour
 
 		[Test]
 		public void Expect_CreateChild_GameObject_AsChild()
+		{
+			var gameObject = root.gameObject.CreateChild();
+			Assert.IsNotNull(gameObject);
+			Assert.AreEqual(root.transform, gameObject.transform.parent);
+		}
+
+		[Test]
+		public void Expect_CreateChild_GameObject_With_Name_AsChild()
+		{
+			const string GAME_OBJECT_NAME = "Test Name";
+			var gameObject = root.gameObject.CreateChild(GAME_OBJECT_NAME);
+			Assert.IsNotNull(gameObject);
+			Assert.AreEqual(GAME_OBJECT_NAME, gameObject.name);
+			Assert.AreEqual(root.transform, gameObject.transform.parent);
+		}
+
+		[Test]
+		public void Expect_CreateChild_Cloned_GameObject_AsChild()
 		{
 			var toClone = new GameObject("GameObject To Clone");
 			toClone.transform.SetParent(root.transform);

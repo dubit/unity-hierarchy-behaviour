@@ -1,9 +1,19 @@
 using UnityEngine;
 
-namespace DUCK.HieriarchyBehaviour
+namespace Duck.HieriarchyBehaviour
 {
 	public static class GameObjectExtensions
 	{
+		/// <summary>
+		/// Creates a new GameObject as a child transform.
+		/// </summary>
+		/// <param name="name">The desired GameObject name</param>
+		/// <returns>The new GameObject</returns>
+		public static GameObject CreateChild(this GameObject parent, string name = "GameObject")
+		{
+			return Utils.CreateChildGameObject(parent, name);
+		}
+
 		/// <summary>
 		/// Creates a clone of the given GameObject as a child transform.
 		/// </summary>

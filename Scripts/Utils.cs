@@ -2,10 +2,17 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace DUCK.HieriarchyBehaviour
+namespace Duck.HieriarchyBehaviour
 {
 	internal static class Utils
 	{
+		public static GameObject CreateChildGameObject(GameObject parent, string name)
+		{
+			var gameObject = new GameObject(name);
+			gameObject.transform.SetParent(parent.transform);
+			return gameObject;
+		}
+
 		public static GameObject CloneGameObject(GameObject gameObjectToClone, GameObject parent)
 		{
 			var gameObject = Object.Instantiate(gameObjectToClone, parent.transform);

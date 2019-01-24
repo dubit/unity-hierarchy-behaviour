@@ -1,8 +1,6 @@
 {
-    "name": "TestHierarchyBehaviours",
-    "references": [
-        "HierarchyBehaviour"
-    ],
+    "name": "Duck.HierarchyBehaviour",
+    "references": [],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],

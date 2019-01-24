@@ -80,7 +80,17 @@ lightEstimation.Initalize(directionalLight, pointLight);
 ```
 
 ### CreateChild
-With Arguements
+
+With Name
+```C#
+var myGameObject = gameObject.CreateChild("HelloWorld");
+```
+Without Name
+```C#
+var myGameObject = gameObject.CreateChild();
+```
+
+With Arguments
 ```C#
 var myClassWithArgs = gameObject.CreateChild<MyClassWithArgs, CustomArgs>(new CustomArgs("HelloWorld"));
 ```
@@ -122,7 +132,7 @@ var myClass = gameObject.CreateChild<MyClass>(prefab);
 ```
 GameObject
 ```C#
-   var myGameObject = gameObject.CreateChild(prefab.gameObject);
+var myGameObject = gameObject.CreateChild(prefab.gameObject);
 ```
 
 This will take a pre-existing (loaded or instantiated) `IHierarchyBehaviour` and clone it.  
