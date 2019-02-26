@@ -45,12 +45,7 @@ namespace Duck.HieriarchyBehaviour
 			where TComponent : Component
 		{
 			var behaviour = Utils.CreateGameObjectWithComponent<TComponent>(parent);
-			var hierarchyBehaviour = behaviour as IHierarchyBehaviour;
-			if (hierarchyBehaviour != null)
-			{
-				hierarchyBehaviour.Initialize();
-			}
-
+			(behaviour as IHierarchyBehaviour)?.Initialize();
 			return behaviour;
 		}
 
@@ -82,12 +77,7 @@ namespace Duck.HieriarchyBehaviour
 			where TComponent : Component
 		{
 			var behaviour = Utils.InstantiateResource<TComponent>(path, parent, worldPositionStays);
-			var hierarchyBehaviour = behaviour as IHierarchyBehaviour;
-			if (hierarchyBehaviour != null)
-			{
-				hierarchyBehaviour.Initialize();
-			}
-
+			(behaviour as IHierarchyBehaviour)?.Initialize();
 			return behaviour;
 		}
 
@@ -120,12 +110,7 @@ namespace Duck.HieriarchyBehaviour
 			where TComponent : Component
 		{
 			var behaviour = Utils.CloneComponent(toClone, parent);
-			var hierarchyBehaviour = behaviour as IHierarchyBehaviour;
-			if (hierarchyBehaviour != null)
-			{
-				hierarchyBehaviour.Initialize();
-			}
-
+			(behaviour as IHierarchyBehaviour)?.Initialize();
 			return behaviour;
 		}
 
