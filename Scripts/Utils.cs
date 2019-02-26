@@ -52,7 +52,7 @@ namespace Duck.HieriarchyBehaviour
 		{
 			if (child.transform.parent != parent.transform)
 			{
-				throw new ArgumentException(string.Format("{0} is not a child transform of {1}", child.name, parent.name));
+				throw new ArgumentException($"{child.name} is not a child transform of {parent.name}");
 			}
 
 			if (Application.isEditor)
