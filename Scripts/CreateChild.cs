@@ -37,7 +37,7 @@ namespace Duck.HieriarchyBehaviour
 
 		/// <summary>
 		/// Creates a child GameObject with the given TComponent component.
-		/// IHierarchyBehaviours' will be initialized.
+		/// IHierarchyBehaviour's will be initialized.
 		/// </summary>
 		/// <typeparam name="TComponent">The type of Component to be added to the new child GameObject.</typeparam>
 		/// <returns>The new TComponent</returns>
