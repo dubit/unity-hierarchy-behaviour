@@ -37,7 +37,7 @@ namespace Duck.HieriarchyBehaviour
 
 		/// <summary>
 		/// Creates a child GameObject with the given TComponent component.
-		/// IHierarchyBehaviours's will be initialized.
+		/// IHierarchyBehaviours' will be initialized.
 		/// </summary>
 		/// <typeparam name="TComponent">The type of Component to be added to the new child GameObject.</typeparam>
 		/// <returns>The new TComponent</returns>
@@ -51,11 +51,11 @@ namespace Duck.HieriarchyBehaviour
 
 		/// <summary>
 		/// Creates a child GameObject with the given TComponent component.
-		/// TComponent will be initialized with the given arguements.
+		/// TComponent will be initialized with the given arguments.
 		/// </summary>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
 		/// <typeparam name="TComponent">The type of Component to be added to the new child GameObject.</typeparam>
-		/// <typeparam name="TArgs">The type of arguements to be given on initialization.</typeparam>
+		/// <typeparam name="TArgs">The type of arguments to be given on initialization.</typeparam>
 		/// <returns>The new TComponent</returns>
 		public static TComponent CreateChild<TComponent, TArgs>(this GameObject parent, TArgs args)
 			where TComponent : Component, IHierarchyBehaviour<TArgs>
@@ -83,13 +83,13 @@ namespace Duck.HieriarchyBehaviour
 
 		/// <summary>
 		/// Creates a child GameObject from resources.
-		/// TComponent will be initialized with the given arguements.
+		/// TComponent will be initialized with the given arguments.
 		/// </summary>
 		/// <param name="path">The path to the resourced asset.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
 		/// <param name="worldPositionStays">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
 		/// <typeparam name="TComponent">The type of Component to be added to the new GameObject.</typeparam>
-		/// <typeparam name="TArgs">The type of arguements to be given on initialization.</typeparam>
+		/// <typeparam name="TArgs">The type of arguments to be given on initialization.</typeparam>
 		/// <returns>The new TComponent</returns>
 		public static TComponent CreateChild<TComponent, TArgs>(this GameObject parent, string path, TArgs args, bool worldPositionStays = true)
 			where TComponent : Component, IHierarchyBehaviour<TArgs>
@@ -116,7 +116,7 @@ namespace Duck.HieriarchyBehaviour
 
 		/// <summary>
 		/// Creates a clone of the given TComponent as a child transform.
-		/// TComponent will be initialized with the given arguements.
+		/// TComponent will be initialized with the given arguments.
 		/// </summary>
 		/// <param name="toClone">The GameObject to clone.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
