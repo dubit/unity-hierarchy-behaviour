@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Duck.HieriarchyBehaviour.Tests
 {
 	[TestFixture]
-	internal partial class GameObjectExtensions
+	internal partial class GameObjectExtensionsTests
 	{
 		private const string TEST_ARGS = "test-args";
 		private const string PREFAB_WITHOUT_ARGS_RESOURCE_PATH = "PrefabWithoutArgs";

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Duck.HieriarchyBehaviour.Tests
 {
 	[TestFixture]
-	internal partial class GameObjectExtensions
+	internal partial class GameObjectExtensionsTests
 	{
 		[Test]
 		public void Expect_ReplaceChild_New_ToDestroy()
