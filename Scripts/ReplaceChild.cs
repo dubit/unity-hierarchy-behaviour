@@ -20,12 +20,12 @@ namespace Duck.HieriarchyBehaviour
 
 		/// <summary>
 		/// Destroys the child GameObject and creates a new child GameObject with the given TComponent component.
-		/// TComponent will be initialized with the given arguements.
+		/// TComponent will be initialized with the given arguments.
 		/// </summary>
 		/// <param name="toDestroy">The child Component to destroy.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
 		/// <typeparam name="TComponent">The type of Component to be created.</typeparam>
-		/// <typeparam name="TArgs">The type of arguements to be given on initialization.</typeparam>
+		/// <typeparam name="TArgs">The type of arguments to be given on initialization.</typeparam>
 		/// <returns>The new TComponent</returns>
 		public static TComponent ReplaceChild<TComponent, TArgs>(this GameObject parent, Component toDestroy, TArgs args)
 			where TComponent : Component, IHierarchyBehaviour<TArgs>
@@ -52,14 +52,14 @@ namespace Duck.HieriarchyBehaviour
 
 		/// <summary>
 		/// Destroys the child GameObject and creates a new child GameObject, by loading from resources and instantiating.
-		/// TComponent will be initialized with the given arguements.
+		/// TComponent will be initialized with the given arguments.
 		/// </summary>
 		/// <param name="toDestroy">The child Component to destroy.</param>
 		/// <param name="path">The path to the resourced asset.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
 		/// <param name="worldPositionStays">Will the instantiated GameObject stay in its world position or be set to local origin.</param>
 		/// <typeparam name="TComponent">The type of Component to be created.</typeparam>
-		/// <typeparam name="TArgs">The type of arguements to be given on initialization.</typeparam>
+		/// <typeparam name="TArgs">The type of arguments to be given on initialization.</typeparam>
 		/// <returns>The new TComponent</returns>
 		public static TComponent ReplaceChild<TComponent, TArgs>(this GameObject parent, Component toDestroy, string path, TArgs args, bool worldPositionStays = true)
 			where TComponent : Component, IHierarchyBehaviour<TArgs>
@@ -85,13 +85,13 @@ namespace Duck.HieriarchyBehaviour
 
 		/// <summary>
 		/// Destroys the child GameObject and creates a clone of the given TComponent as a child transform.
-		/// TComponent will be initialized with the given arguements.
+		/// TComponent will be initialized with the given arguments.
 		/// </summary>
 		/// <param name="toDestroy">The child Component to destroy.</param>
 		/// <param name="toClone">The GameObject to clone.</param>
 		/// <param name="args">The TArgs object to be passed in on initialization.</param>
 		/// <typeparam name="TComponent">The type of Component to be created.</typeparam>
-		/// <typeparam name="TArgs">The type of arguements to be given on initialization.</typeparam>
+		/// <typeparam name="TArgs">The type of arguments to be given on initialization.</typeparam>
 		/// <returns>The new TComponent</returns>
 		public static TComponent ReplaceChild<TComponent, TArgs>(this GameObject parent, Component toDestroy, TComponent toClone, TArgs args)
 			where TComponent : Component, IHierarchyBehaviour<TArgs>
