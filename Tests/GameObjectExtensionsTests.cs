@@ -22,7 +22,7 @@ namespace Duck.HieriarchyBehaviour.Tests
 		[OneTimeSetUp]
 		public void OneTimeSetup()
 		{
-			root = new GameObject("UnitTest (HierarchyBehaviour)").AddComponent<TestHierarchyBehaviour>();
+			root = new GameObject(nameof(TestHierarchyBehaviour)).AddComponent<TestHierarchyBehaviour>();
 
 			didResourcesExist = Directory.Exists(Application.dataPath + RESOURCE_PATH);
 			if (!didResourcesExist)
@@ -31,11 +31,11 @@ namespace Duck.HieriarchyBehaviour.Tests
 			}
 
 			prefabBehaviour = new GameObject(PREFAB_WITHOUT_ARGS_RESOURCE_PATH).AddComponent<TestHierarchyBehaviour>();
-			PrefabUtility.SaveAsPrefabAsset(prefabBehaviour.gameObject, "Assets/Resources/" + PREFAB_WITHOUT_ARGS_RESOURCE_PATH + ".prefab");
+			PrefabUtility.SaveAsPrefabAsset(prefabBehaviour.gameObject, $"Assets/Resources/{PREFAB_WITHOUT_ARGS_RESOURCE_PATH}.prefab");
 			Object.DestroyImmediate(prefabBehaviour.gameObject);
 
 			prefabBehaviourWithArgs = new GameObject(PREFAB_WITH_ARGS_RESOURCE_PATH).AddComponent<TestHierarchyBehaviourWithArgs>();
-			PrefabUtility.SaveAsPrefabAsset(prefabBehaviourWithArgs.gameObject, "Assets/Resources/" + PREFAB_WITH_ARGS_RESOURCE_PATH + ".prefab");
+			PrefabUtility.SaveAsPrefabAsset(prefabBehaviourWithArgs.gameObject, $"Assets/Resources/{PREFAB_WITH_ARGS_RESOURCE_PATH}.prefab");
 			Object.DestroyImmediate(prefabBehaviourWithArgs.gameObject);
 
 			AssetDatabase.Refresh();
