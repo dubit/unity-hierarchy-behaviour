@@ -1,4 +1,4 @@
-﻿namespace Duck.HieriarchyBehaviour
+﻿namespace Duck.HierarchyBehaviour
 {
 	public interface IHierarchyBehaviour<TArgs>
 	{
