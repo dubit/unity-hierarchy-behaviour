@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Duck.HieriarchyBehaviour
+namespace Duck.HierarchyBehaviour
 {
 	internal static class Utils
 	{
