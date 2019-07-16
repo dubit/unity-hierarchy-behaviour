@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Duck.HieriarchyBehaviour
+namespace Duck.HierarchyBehaviour
 {
 	public static partial class GameObjectExtensions
 	{
