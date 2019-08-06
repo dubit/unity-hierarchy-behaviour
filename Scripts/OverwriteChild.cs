@@ -12,7 +12,7 @@ namespace Duck.HierarchyBehaviour
 		/// <typeparam name="TComponent"></typeparam>
 		/// <returns>The new TComponent</returns>
 		public static TComponent OverwriteChild<TComponent>(this GameObject parent, ref Component toOverwrite)
-			where TComponent : MonoBehaviour
+			where TComponent : Component
 		{
 			var component = toOverwrite ? parent.ReplaceChild<TComponent>(toOverwrite) : parent.CreateChild<TComponent>();
 			toOverwrite = component;
@@ -29,7 +29,7 @@ namespace Duck.HierarchyBehaviour
 		/// <typeparam name="TArgs">The type of arguments to be given on initialization.</typeparam>
 		/// <returns>The new TComponent</returns>
 		public static TComponent OverwriteChild<TComponent, TArgs>(this GameObject parent, ref Component toOverwrite, TArgs args)
-			where TComponent : MonoBehaviour, IHierarchyBehaviour<TArgs>
+			where TComponent : Component, IHierarchyBehaviour<TArgs>
 		{
 			var component = toOverwrite ? parent.ReplaceChild<TComponent, TArgs>(toOverwrite, args) : parent.CreateChild<TComponent, TArgs>(args);
 			toOverwrite = component;
@@ -44,7 +44,7 @@ namespace Duck.HierarchyBehaviour
 		/// <typeparam name="TComponent"></typeparam>
 		/// <returns>The new TComponent</returns>
 		public static TComponent OverwriteChild<TComponent>(this GameObject parent, ref Component toOverwrite, string path)
-			where TComponent : MonoBehaviour
+			where TComponent : Component
 		{
 			var component = toOverwrite ? parent.ReplaceChild<TComponent>(toOverwrite, path) : parent.CreateChild<TComponent>(path);
 			toOverwrite = component;
@@ -78,7 +78,7 @@ namespace Duck.HierarchyBehaviour
 		/// <typeparam name="TComponent"></typeparam>
 		/// <returns>The new TComponent</returns>
 		public static TComponent OverwriteChild<TComponent>(this GameObject parent, ref Component toOverwrite, TComponent toClone)
-			where TComponent : MonoBehaviour
+			where TComponent : Component
 		{
 			var component = toOverwrite ? parent.ReplaceChild(toOverwrite, toClone) : parent.CreateChild(toClone);
 			toOverwrite = component;
