@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Duck.HieriarchyBehaviour.Tests.Behaviours
+namespace Duck.HierarchyBehaviour.Tests.Behaviours
 {
 	[AddComponentMenu("")]
 	public class TestHierarchyBehaviour : MonoBehaviour, IHierarchyBehaviour
